@@ -4,6 +4,9 @@
   "description": "> 有了JS，天天喝茶水",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "dev": "NODE_ENV=development node app.js",
+    "build": "webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
