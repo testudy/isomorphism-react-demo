@@ -30,6 +30,7 @@
     "keymirror": "^0.1.1",
     "koa": "^1.2.0",
     "koa-bodyparser": "^2.1.0",
+    "koa-compose": "^2.4.0",
     "koa-compress": "^1.0.9",
     "koa-csrf": "^2.4.0",
     "koa-generic-session": "^1.10.2",
