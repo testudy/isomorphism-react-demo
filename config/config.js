@@ -9,7 +9,7 @@ let config = {
     env: 'production',
     appName: 'TEA',
     port: 18080,
-    viewDir: path.join(__dirname, '..', 'view'),
+    viewDir: path.join(__dirname, '..'),
     logDir: path.join(__dirname, '..', 'log'),
     staticDir: path.join(__dirname, '..', 'static'),
 
