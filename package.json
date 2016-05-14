@@ -1,0 +1,68 @@
+{
+  "name": "tea",
+  "version": "0.0.1",
+  "description": "> 有了JS，天天喝茶水",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guyue/tea.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guyue/tea/issues"
+  },
+  "homepage": "https://github.com/guyue/tea#readme",
+  "dependencies": {
+    "babel-core": "^6.8.0",
+    "babel-polyfill": "^6.8.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.8.0",
+    "classnames": "^2.2.5",
+    "history": "^2.1.1",
+    "keymirror": "^0.1.1",
+    "koa": "^1.2.0",
+    "koa-bodyparser": "^2.1.0",
+    "koa-compress": "^1.0.9",
+    "koa-csrf": "^2.4.0",
+    "koa-generic-session": "^1.10.2",
+    "koa-onerror": "^1.3.1",
+    "koa-react-view": "^2.0.0",
+    "koa-router": "^5.4.0",
+    "koa-sass": "^1.0.1",
+    "koa-static-cache": "^3.1.7",
+    "react": "^15.0.2",
+    "react-addons-linked-state-mixin": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.4.0",
+    "react-router-redux": "^4.0.4",
+    "react-tap-event-plugin": "^1.0.0",
+    "redux": "^3.5.2",
+    "validator": "^5.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel-loader": "^6.2.4",
+    "css-loader": "^0.23.1",
+    "csslint": "^0.10.0",
+    "csslint-loader": "^0.2.1",
+    "eslint": "^2.10.0",
+    "eslint-loader": "^1.3.0",
+    "eslint-plugin-react": "^5.1.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.17.0",
+    "material-ui": "^0.15.0",
+    "parker-loader": "^1.1.6",
+    "postcss-loader": "^0.9.1",
+    "sass": "^0.5.0",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.0"
+  }
+}
