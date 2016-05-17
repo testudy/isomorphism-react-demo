@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node app.js",
     "build-fe": "webpack --config webpack-fe.config.js --watch",
+    "build-be": "webpack --config webpack-be.config.js --watch",
+    "release-fe": "webpack --config webpack-fe.config.js --define process.env.NODE_ENV='\"production\"' -p",
+    "release-be": "webpack --config webpack-be.config.js --define process.env.NODE_ENV='\"production\"' -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -21,6 +21,10 @@ const staticCache = require('koa-static-cache');
 app.use(staticCache(config.feStaticDir, {
     dynamic: true,
 }));
+app.use(staticCache(config.beStaticDir, {
+    prefix: 'admin',
+    dynamic: true,
+}));
 
 
 const session = require('koa-generic-session');
