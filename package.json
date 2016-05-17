@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "NODE_ENV=development node app.js",
-    "build": "webpack --watch",
+    "build-fe": "webpack --config webpack-fe.config.js --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

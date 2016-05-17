@@ -17,6 +17,12 @@ const onerror = require('koa-onerror');
 onerror(app);
 
 
+const staticCache = require('koa-static-cache');
+app.use(staticCache(config.feStaticDir, {
+    dynamic: true,
+}));
+
+
 const session = require('koa-generic-session');
 app.use(session(app));
 
