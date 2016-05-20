@@ -11,18 +11,22 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
+import Report from '../../common/component/report.jsx';
 
 class App extends Component {
 
     render() {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
-                <AppBar
-                    title="TEA评测系统"
-                    onTitleTouchTap={this.handleTouchTap}
-                    iconElementRight={<FlatButton label="OK" />}
-                    onLeftIconButtonTouchTap={this.handleRightIconButtonTouchTap}
-                />
+                <div>
+                    <AppBar
+                        title="TEA评测系统"
+                        onTitleTouchTap={this.handleTouchTap}
+                        iconElementRight={<FlatButton label="OK" />}
+                        onLeftIconButtonTouchTap={this.handleRightIconButtonTouchTap}
+                    />
+                    <Report />
+                </div>
             </MuiThemeProvider>
         );
     }
