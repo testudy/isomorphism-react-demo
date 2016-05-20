@@ -59,6 +59,7 @@ register({
 const react = require('koa-react-view');
 react(app, {
     views: config.viewDir,
+    beautify: true,
 });
 
 const backend = require('./backend/app');
