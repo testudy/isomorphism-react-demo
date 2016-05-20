@@ -18,7 +18,7 @@ class App extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <AppBar
-                    title="宝宝树评测系统"
+                    title="TEA评测系统"
                     onTitleTouchTap={this.handleTouchTap}
                     iconElementRight={<FlatButton label="OK" />}
                     onLeftIconButtonTouchTap={this.handleRightIconButtonTouchTap}
