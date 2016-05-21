@@ -4,7 +4,6 @@ import React, {
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
 import SocialPeople from 'material-ui/svg-icons/social/people';
 import ActionQuestionAnswer from 'material-ui/svg-icons/action/question-answer';
 
@@ -23,7 +22,6 @@ export default class Report extends Component {
             <div>
                 <AppBar
                     title="TEA评测系统"
-                    iconElementRight={<FlatButton label="OK" />}
                     onLeftIconButtonTouchTap={() => this.handleToggle()}
                 />
                 <Drawer
