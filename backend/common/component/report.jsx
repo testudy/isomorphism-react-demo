@@ -16,7 +16,10 @@ export default class Report extends Component {
 
     render() {
         return (
-            <Table style={{width: '960px', margin: 'auto'}}>
+            <Table style={{
+                width: '960px',
+                margin: 'auto',
+            }}>
                 <TableHeader>
                     <TableRow>
                         <TableHeaderColumn>序号</TableHeaderColumn>
@@ -29,7 +32,9 @@ export default class Report extends Component {
                 </TableHeader>
                 <TableFooter>
                     <TableRow>
-                        <TableRowColumn style={{textAlign: 'right'}}>共100份</TableRowColumn>
+                        <TableRowColumn style={{
+                            textAlign: 'right',
+                        }}>共100份</TableRowColumn>
                     </TableRow>
                 </TableFooter>
                 <TableBody stripedRows={true}>
