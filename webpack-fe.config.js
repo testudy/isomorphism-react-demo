@@ -13,7 +13,7 @@ module.exports = {
             test: /\.jsx?$/,
             include: [
                 path.resolve(__dirname, 'frontend/static/js'),
-                path.resolve(__dirname, 'common')
+                path.resolve(__dirname, 'frontend/common')
             ],
             exclude: /node_modules/,
             loaders: [
