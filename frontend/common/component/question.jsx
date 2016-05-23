@@ -122,7 +122,12 @@ export default class Question extends Component {
                         padding: 0,
                         margin: '16px 0',
                     }}>
-                        <img src="http://lorempixel.com/600/337/nature/?t=1" />
+                        <img
+                            style={{
+                                maxWidth: '100%',
+                            }}
+                            src="http://lorempixel.com/600/337/nature/?t=1"
+                        />
                     </CardText>
                     <CardActions style={{
                         padding: 0,
@@ -194,7 +199,12 @@ export default class Question extends Component {
                         padding: 0,
                         margin: '16px 0',
                     }}>
-                        <img src="http://lorempixel.com/600/337/nature/?t=2" />
+                        <img
+                            style={{
+                                maxWidth: '100%',
+                            }}
+                            src="http://lorempixel.com/600/337/nature/?t=2"
+                        />
                     </CardText>
                     <CardActions style={{
                         padding: 0,
