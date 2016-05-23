@@ -24,6 +24,73 @@ export default class Question extends Component {
     }
 
     render() {
+        const questions = this.props.questions.map((question, index) => {
+            let image = null;
+
+            if (question.image) {
+                image = (
+                    <CardText style={{
+                        padding: 0,
+                        margin: '16px 0',
+                    }}>
+                        <img
+                            style={{
+                                maxWidth: '100%',
+                            }}
+                            src={question.image}
+                        />
+                    </CardText>
+                );
+            }
+
+            let options = null;
+            if (question.multi) {
+                options = question.options.map((option, index) => {
+                    const number = String.fromCharCode('A'.charCodeAt(0) + index);
+                    return (
+                        <Checkbox key={`option${question.id}-${index}`}
+                            value={`${index}`}
+                            label={`${number}、${option}`}
+                        />
+                    );
+                });
+            } else {
+                options = (
+                    <RadioButtonGroup name={`question${question.id}`}>
+                        {question.options.map((option, index) => {
+                            const number = String.fromCharCode('A'.charCodeAt(0) + index);
+                            return (
+                                <RadioButton key={`option${question.id}-${index}`}
+                                    value={`${index}`}
+                                    label={`${number}、${option}`}
+                                />
+                            );
+                        })}
+                    </RadioButtonGroup>
+                );
+            }
+
+            return (
+                <Card key={`question${question.id}`} style={{
+                    padding: '16px',
+                }}>
+                    <CardHeader
+                        title={`${index + 1}、${question.title}`}
+                        style={{
+                            padding: 0,
+                            margin: '0 0 16px 0',
+                        }}
+                    />
+                    {image}
+                    <CardActions style={{
+                        padding: 0,
+                        margin: '16px 0',
+                    }}>
+                        {options}
+                    </CardActions>
+                </Card>
+            );
+        });
         return (
             <Paper style={{
                 width: '960px',
@@ -74,160 +141,7 @@ export default class Question extends Component {
                         />
                     </CardText>
                 </Card>
-                <Card style={{
-                    padding: '16px',
-                }}>
-                    <CardHeader
-                        title="1、有人为了测试大猩猩聪明程度，特地在大猩猩面前放了一叠百元纸币和一部相机，请问猩猩会选哪个？"
-                        style={{
-                            padding: 0,
-                            margin: '0 0 16px 0',
-                        }}
-                    />
-                    <CardActions style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <RadioButtonGroup name="question1">
-                            <RadioButton
-                                value="0"
-                                label="A、纸币"
-                            />
-                            <RadioButton
-                                value="1"
-                                label="B、相机"
-                            />
-                            <RadioButton
-                                value="2"
-                                label="C、两个都选"
-                            />
-                            <RadioButton
-                                value="3"
-                                label="C、都不选，找食物"
-                            />
-                        </RadioButtonGroup>
-                    </CardActions>
-                </Card>
-                <Card style={{
-                    padding: '16px',
-                }}>
-                    <CardHeader
-                        title="2、用一支粉笔，在黑板上画一个正方形，最少需要几笔(每一笔不能拐弯)？"
-                        style={{
-                            padding: 0,
-                            margin: '0 0 16px 0',
-                        }}
-                    />
-                    <CardText style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <img
-                            style={{
-                                maxWidth: '100%',
-                            }}
-                            src="http://lorempixel.com/600/337/nature/?t=1"
-                        />
-                    </CardText>
-                    <CardActions style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <RadioButtonGroup name="question1">
-                            <RadioButton
-                                value="0"
-                                label="A、1"
-                            />
-                            <RadioButton
-                                value="1"
-                                label="B、2"
-                            />
-                            <RadioButton
-                                value="2"
-                                label="C、3"
-                            />
-                            <RadioButton
-                                value="3"
-                                label="C、4"
-                            />
-                        </RadioButtonGroup>
-                    </CardActions>
-                </Card>
-                <Card style={{
-                    padding: '16px',
-                }}>
-                    <CardHeader
-                        title="3、唐僧最喜欢哪个女妖精，谁最知道？"
-                        style={{
-                            padding: 0,
-                            margin: '0 0 16px 0',
-                        }}
-                    />
-                    <CardActions style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <Checkbox
-                            value="0"
-                            label="A、孙悟空"
-                        />
-                        <Checkbox
-                            value="1"
-                            label="B、猪八戒"
-                        />
-                        <Checkbox
-                            value="2"
-                            label="C、沙和尚"
-                        />
-                        <Checkbox
-                            value="3"
-                            label="C、白龙马"
-                        />
-                    </CardActions>
-                </Card>
-                <Card style={{
-                    padding: '16px',
-                }}>
-                    <CardHeader
-                        title="4、如果我们叫张家为张户，李家为李户，那么我们不能这样称呼哪家呢？"
-                        style={{
-                            padding: 0,
-                            margin: '0 0 16px 0',
-                        }}
-                    />
-                    <CardText style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <img
-                            style={{
-                                maxWidth: '100%',
-                            }}
-                            src="http://lorempixel.com/600/337/nature/?t=2"
-                        />
-                    </CardText>
-                    <CardActions style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <Checkbox
-                            value="0"
-                            label="A、马"
-                        />
-                        <Checkbox
-                            value="1"
-                            label="B、孙"
-                        />
-                        <Checkbox
-                            value="2"
-                            label="C、赵"
-                        />
-                        <Checkbox
-                            value="3"
-                            label="C、杨"
-                        />
-                    </CardActions>
-                </Card>
+                {questions}
             </Paper>
         );
     }
