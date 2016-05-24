@@ -35,7 +35,6 @@ export default class AppAction extends Component {
     }
 
     componentDidMount() {
-        this.timer = setTimeout(() => this.progress(5), 1000);
         this.schedule = setInterval(() => {
             let diff = this.countdown - Math.round((Date.now() - this.start) / 1000);
 

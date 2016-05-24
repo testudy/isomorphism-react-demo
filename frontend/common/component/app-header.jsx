@@ -3,7 +3,6 @@ import React, {
 } from 'react';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
-import LinearProgress from 'material-ui/LinearProgress';
 import AppAction from './app-action.jsx';
 import AppProgress from './app-progress.jsx';
 
