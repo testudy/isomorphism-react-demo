@@ -9,12 +9,8 @@ import {
 } from 'react-router-redux';
 
 import store from './store';
-import routes from '../../common/routes.jsx';
+import AppRouter from '../../common/AppRouter.jsx';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-export default (
-    <Router history={history}>
-        {routes}
-    </Router>
-);
+export default (<AppRouter history={history} />);
