@@ -13,7 +13,6 @@ import {
     RadioButtonGroup,
 } from 'material-ui/RadioButton';
 import Checkbox from 'material-ui/Checkbox';
-import TextField from 'material-ui/TextField';
 import ActionSchedule from 'material-ui/svg-icons/action/schedule';
 
 
@@ -112,33 +111,6 @@ export default class Question extends Component {
                                 height: 96,
                             }}/>
                         </div>
-                    </CardText>
-                </Card>
-                <Card style={{
-                    padding: '16px',
-                }}>
-                    <CardHeader
-                        title="个人信息填写"
-                        style={{
-                            padding: 0,
-                            margin: '0 0 16px 0',
-                        }}
-                    />
-                    <CardText style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <TextField
-                            hintText="王少伟"
-                            errorText="请填写您的姓名，方便我们后续和您联系"
-                            floatingLabelText="您的姓名"
-                        />
-                        <br />
-                        <TextField
-                            hintText="186-1051-9100"
-                            errorText="请填写您的手机号码，方便我们后续和您联系"
-                            floatingLabelText="您的手机号码"
-                        />
                     </CardText>
                 </Card>
                 {questions}

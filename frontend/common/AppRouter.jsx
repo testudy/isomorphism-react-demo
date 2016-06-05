@@ -8,6 +8,7 @@ import {
 } from 'react-router';
 
 import Index from './container/index.jsx';
+import Test from './container/Test.jsx';
 
 export default class AppRouter extends Component {
 
@@ -19,7 +20,7 @@ export default class AppRouter extends Component {
         return (
             <Router {...this.props}>
                 <Route path="/" component={Index} />
-                <Route path="/:date/:phone" component={Index} />
+                <Route path="/test/:date/:phone" component={Test} />
             </Router>
         );
     }
