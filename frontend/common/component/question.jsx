@@ -1,7 +1,6 @@
 import React, {
     Component,
 } from 'react';
-import Paper from 'material-ui/Paper';
 import {
     Card,
     CardActions,
@@ -90,31 +89,11 @@ export default class Question extends Component {
                 </Card>
             );
         });
+
         return (
-            <Paper style={{
-                width: '960px',
-                paddingTop: '68px',
-                margin: 'auto auto  68px',
-            }}>
-                <Card style={{
-                    padding: '16px',
-                }}>
-                    <CardText style={{
-                        padding: 0,
-                        margin: '16px 0',
-                    }}>
-                        <div style={{
-                            textAlign: 'center',
-                        }}>
-                            <ActionSchedule style={{
-                                width: 96,
-                                height: 96,
-                            }}/>
-                        </div>
-                    </CardText>
-                </Card>
+            <div>
                 {questions}
-            </Paper>
+            </div>
         );
     }
 
