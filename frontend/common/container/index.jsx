@@ -17,6 +17,7 @@ import {
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import ContentSend from 'material-ui/svg-icons/content/send';
+import style from '../style';
 
 class Index extends Component {
 
@@ -24,11 +25,7 @@ class Index extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <div>
-                    <Paper style={{
-                        position: 'fixed',
-                        width: '100%',
-                        zIndex: '100',
-                    }}
+                    <Paper style={style.header}
                         zDepth={2}
                     >
                         <AppBar
@@ -36,25 +33,13 @@ class Index extends Component {
                             showMenuIconButton={false}
                         />
                     </Paper>
-                    <Paper style={{
-                        width: '960px',
-                        paddingTop: '68px',
-                        margin: 'auto auto  68px',
-                    }}>
-                        <Card style={{
-                            padding: '16px',
-                        }}>
+                    <Paper style={style.container}>
+                        <Card style={style.card}>
                             <CardHeader
                                 title="个人信息填写"
-                                style={{
-                                    padding: 0,
-                                    margin: '0 0 16px 0',
-                                }}
+                                style={style.cardHeader}
                             />
-                            <CardText style={{
-                                padding: 0,
-                                margin: '16px 0',
-                            }}>
+                            <CardText style={style.cardText}>
                                 <TextField
                                     hintText="王少伟"
                                     errorText="请填写您的姓名，方便我们后续和您联系"
@@ -67,10 +52,7 @@ class Index extends Component {
                                     floatingLabelText="您的手机号码"
                                 />
                             </CardText>
-                            <CardActions style={{
-                                padding: 0,
-                                margin: '16px 0',
-                            }}>
+                            <CardActions style={style.cardActions}>
                             <RaisedButton
                                 label="开始答题"
                                 labelPosition="after"
