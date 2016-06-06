@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
-import AppAction from './app-action.jsx';
-import AppProgress from './app-progress.jsx';
+import TestAction from './TestAction.jsx';
+import TestProgress from './TestProgress.jsx';
 
 
 export default class AppHeader extends Component {
@@ -22,10 +22,10 @@ export default class AppHeader extends Component {
             }}
                 zDepth={2}
             >
-                <AppProgress />
+                <TestProgress />
                 <AppBar
                     title="TEA素质测评"
-                    iconElementRight={<AppAction />}
+                    iconElementRight={<TestAction />}
                     iconStyleRight={{
                         marginTop: 0,
                         marginRight: 0,

@@ -7,9 +7,9 @@ import {
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
-import AppHeader from '../component/app-header.jsx';
+import TestHeader from '../component/TestHeader.jsx';
 import TestPause from '../component/TestPause.jsx';
-import Question from '../component/question.jsx';
+import Question from '../component/Question.jsx';
 
 
 class Test extends Component {
@@ -18,7 +18,7 @@ class Test extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <div>
-                    <AppHeader />
+                    <TestHeader />
                     <Paper style={{
                         width: '960px',
                         paddingTop: '68px',
