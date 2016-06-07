@@ -1,4 +1,7 @@
 import fetch from 'isomorphic-fetch';
+import {
+    push,
+} from 'react-router-redux';
 
 import constants from './constants.jsx';
 
@@ -34,8 +37,9 @@ export function createTest() {
             console.log(json);
             dispatch({
                 type: CREATE_TEST_SUCCESS,
-                questions: json
+                user: json,
             });
+            dispatch(push(`/test/${json.date}/${json.phone}`));
         }).catch((error) => {
             console.log(error);
             dispatch({
