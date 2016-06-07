@@ -6,6 +6,7 @@ import {
 import constants from './constants.jsx';
 
 const {
+    SET_USER,
     CREATE_TEST_REQUEST,
     CREATE_TEST_SUCCESS,
     CREATE_TEST_FAILURE,
@@ -14,13 +15,19 @@ const {
     FETCH_QUESTIONS_FAILURE,
 } = constants;
 
+export function setUser(name, phone) {
+    return {
+        type: SET_USER,
+        user: {
+            name,
+            phone,
+        },
+    };
+}
+
 export function createTest() {
     return (dispatch, getState) => {
-        //const user = getState().user;
-        const user = {
-            name: 'test',
-            phone: '18610519178',
-        };
+        const user = getState().user;
 
         dispatch({
             type: CREATE_TEST_REQUEST,
@@ -34,14 +41,12 @@ export function createTest() {
             },
             body: JSON.stringify(user),
         }).then((response) => response.json()).then((json) => {
-            console.log(json);
             dispatch({
                 type: CREATE_TEST_SUCCESS,
                 user: json,
             });
             dispatch(push(`/test/${json.date}/${json.phone}`));
         }).catch((error) => {
-            console.log(error);
             dispatch({
                 type: CREATE_TEST_FAILURE,
             });

@@ -20,6 +20,7 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import style from '../style';
 
 import {
+    setUser,
     createTest,
 } from '../actions.jsx';
 
@@ -90,6 +91,7 @@ class Index extends Component {
     submit() {
         if (this.validateName() &&
                 this.validatePhone()) {
+            this.props.dispatch(setUser(this.state.name, this.state.phone));
             this.props.dispatch(createTest());
         }
     }

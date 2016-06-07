@@ -1,3 +1,10 @@
+import constants from './constants.jsx';
+
+const {
+    SET_USER,
+    CREATE_TEST_SUCCESS,
+} = constants;
+
 const testQuestions = [
     {
         id: 1,
@@ -44,6 +51,13 @@ const testQuestions = [
     },
 ];
 
+function user(state = {}, action) {
+    if (action.type === SET_USER || action.type === CREATE_TEST_SUCCESS) {
+        return Object.assign({}, action.user);
+    }
+    return state;
+}
+
 
 /**
  * 题目列表
@@ -56,6 +70,7 @@ function questions(state = testQuestions) {
 
 
 const reducers = {
+    user,
     questions,
 };
 
