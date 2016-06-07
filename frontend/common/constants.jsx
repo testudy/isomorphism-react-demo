@@ -1,4 +1,7 @@
 import keymirror from 'keymirror';
 
-export const ActionConstants = keymirror({
+export default keymirror({
+    CREATE_TEST_REQUEST: null,
+    CREATE_TEST_SUCCESS: null,
+    CREATE_TEST_FAILURE: null,
 });

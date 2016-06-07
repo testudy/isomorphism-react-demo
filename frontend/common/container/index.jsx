@@ -19,6 +19,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import style from '../style';
 
+import {
+    createTest,
+} from '../actions.jsx';
+
 class Index extends Component {
 
     constructor(props) {
@@ -86,7 +90,7 @@ class Index extends Component {
     submit() {
         if (this.validateName() &&
                 this.validatePhone()) {
-            console.log('dispatch action');
+            this.props.dispatch(createTest());
         }
     }
 
