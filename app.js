@@ -35,9 +35,9 @@ const bodyParser = require('koa-bodyparser');
 app.use(bodyParser());
 
 
-const csrf = require('koa-csrf');
-csrf(app);
-app.use(csrf.middleware);
+//const csrf = require('koa-csrf');
+//csrf(app);
+//app.use(csrf.middleware);
 
 
 const register = require('babel-register');
