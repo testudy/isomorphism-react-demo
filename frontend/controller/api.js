@@ -1,13 +1,17 @@
 module.exports = {
     queryTest: function *() {
         this.body = {
-            name: 'hello world',
+            name: 'hujiwei',
+            phone: '18610519178',
+            date: Date.now(),
         };
     },
 
     createTest: function *() {
         this.body = {
-            name: 'hello world',
+            name: 'hujiwei',
+            phone: '18610519178',
+            date: Date.now(),
         };
     },
 };
