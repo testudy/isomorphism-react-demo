@@ -4,13 +4,19 @@ import {
     applyMiddleware,
 } from 'redux';
 import {
+    browserHistory,
+} from 'react-router';
+import {
     routerReducer,
+    routerMiddleware,
 } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 
 import reducers from '../../common/reducers.jsx';
 
-const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+const routerMiddlewareWithBrowserHistory = routerMiddleware(browserHistory);
+
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, routerMiddlewareWithBrowserHistory)(createStore);
 
 const store = createStoreWithMiddleware(combineReducers(Object.assign({}, reducers, {
     routing: routerReducer,
