@@ -6,6 +6,9 @@ const {
     CREATE_TEST_REQUEST,
     CREATE_TEST_SUCCESS,
     CREATE_TEST_FAILURE,
+    FETCH_QUESTIONS_REQUEST,
+    FETCH_QUESTIONS_SUCCESS,
+    FETCH_QUESTIONS_FAILURE,
 } = constants;
 
 export function createTest() {
@@ -27,7 +30,7 @@ export function createTest() {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user),
-        }).then(response => response.json()).then((json) => {
+        }).then((response) => response.json()).then((json) => {
             console.log(json);
             dispatch({
                 type: CREATE_TEST_SUCCESS,
@@ -38,6 +41,32 @@ export function createTest() {
             dispatch({
                 type: CREATE_TEST_FAILURE,
             });
-        });;
+        });
+    };
+}
+
+export function fetchQuestions() {
+    return (dispatch, getState) => {
+        dispatch({
+            type: FETCH_QUESTIONS_REQUEST,
+        });
+
+        const user = getState().user;
+
+        return fetch('/api/questions', {
+            headers: {
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(user),
+        }).then((response) => response.json()).then((json) => {
+            dispatch({
+                type: FETCH_QUESTIONS_SUCCESS,
+                questions: json,
+            });
+        }).catch((errpr) => {
+            dispatch({
+                type: FETCH_QUESTIONS_FAILURE,
+            });
+        });
     };
 }
