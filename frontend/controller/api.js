@@ -1,3 +1,4 @@
+const MongoClient = require('mongodb').MongoClient;
 module.exports = {
     queryTest: function *() {
         this.body = {
@@ -16,6 +17,9 @@ module.exports = {
     },
 
     queryQuestions: function *() {
-        this.body = require('../data/questions');
+        const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+        const questions = db.collection('questions');
+        //yield questions.insertMany(require('../data/questions'));
+        this.body = yield questions.find().toArray();
     },
 };

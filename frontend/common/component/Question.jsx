@@ -46,7 +46,7 @@ export default class Question extends Component {
                 options = question.options.map((option, index) => {
                     const number = String.fromCharCode('A'.charCodeAt(0) + index);
                     return (
-                        <Checkbox key={`option${question.id}-${index}`}
+                        <Checkbox key={`option${question._id}-${index}`}
                             value={`${index}`}
                             label={`${number}、${option}`}
                         />
@@ -54,11 +54,11 @@ export default class Question extends Component {
                 });
             } else {
                 options = (
-                    <RadioButtonGroup name={`question${question.id}`}>
+                    <RadioButtonGroup name={`question${question._id}`}>
                         {question.options.map((option, index) => {
                             const number = String.fromCharCode('A'.charCodeAt(0) + index);
                             return (
-                                <RadioButton key={`option${question.id}-${index}`}
+                                <RadioButton key={`option${question._id}-${index}`}
                                     value={`${index}`}
                                     label={`${number}、${option}`}
                                 />
@@ -69,7 +69,7 @@ export default class Question extends Component {
             }
 
             return (
-                <Card key={`question${question.id}`} style={{
+                <Card key={`question${question._id}`} style={{
                     padding: '16px',
                 }}>
                     <CardHeader
