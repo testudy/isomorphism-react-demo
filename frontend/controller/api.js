@@ -14,4 +14,8 @@ module.exports = {
             date: Date.now(),
         };
     },
+
+    queryQuestions: function *() {
+        this.body = require('../data/questions');
+    },
 };

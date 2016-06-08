@@ -4,6 +4,7 @@ import {
 } from 'react-router-redux';
 
 import constants from './constants.jsx';
+import uri from '../util/uri';
 
 const {
     SET_USER,
@@ -62,11 +63,10 @@ export function fetchQuestions() {
 
         const user = getState().user;
 
-        return fetch('/api/questions', {
+        return fetch('/api/questions?' + uri.param(user), {
             headers: {
                 'Accept': 'application/json',
             },
-            body: JSON.stringify(user),
         }).then((response) => response.json()).then((json) => {
             dispatch({
                 type: FETCH_QUESTIONS_SUCCESS,

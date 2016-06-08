@@ -11,8 +11,17 @@ import TestHeader from '../component/TestHeader.jsx';
 import TestPause from '../component/TestPause.jsx';
 import Question from '../component/Question.jsx';
 
+import {
+    fetchQuestions,
+} from '../actions.jsx';
+
 
 class Test extends Component {
+
+    constructor(props) {
+        super(props);
+        this.props.dispatch(fetchQuestions());
+    }
 
     render() {
         return (
