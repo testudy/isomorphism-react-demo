@@ -60,8 +60,8 @@ const router = require('koa-router')();
 const apiRouter = require('./router/api');
 router.use('/api', apiRouter.routes());
 
-const adminRouter = require('./router/admin');
-router.use('/admin', adminRouter.routes());
+const backendRouter = require('./router/backend');
+router.use('/backend', backendRouter.routes());
 
 const frontendRouter = require('./router/frontend');
 router.use('/', frontendRouter.routes());
