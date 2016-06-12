@@ -21,10 +21,6 @@ const staticCache = require('koa-static-cache');
 app.use(staticCache(config.feStaticDir, {
     dynamic: true,
 }));
-app.use(staticCache(config.beStaticDir, {
-    prefix: 'admin',
-    dynamic: true,
-}));
 
 
 const session = require('koa-generic-session');
@@ -62,10 +58,8 @@ react(app, {
     beautify: true,
 });
 
-const backend = require('./backend/app');
 const frontend = require('./frontend/app');
 
-app.use(mount('/admin', backend));
 app.use(mount('/', frontend));
 
 

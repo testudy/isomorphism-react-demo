@@ -12,7 +12,6 @@ let config = {
     viewDir: path.join(__dirname, '..'),
     logDir: path.join(__dirname, '..', 'log'),
     feStaticDir: path.join(__dirname, '..', 'frontend/dist'),
-    beStaticDir: path.join(__dirname, '..', 'backend/dist'),
 
 };
 
