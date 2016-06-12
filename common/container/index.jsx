@@ -22,7 +22,7 @@ import style from '../style';
 import {
     setUser,
     createTest,
-} from '../actions.jsx';
+} from '../action/frontend.jsx';
 
 class Index extends Component {
 

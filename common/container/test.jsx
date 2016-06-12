@@ -13,7 +13,7 @@ import Question from '../component/Question.jsx';
 
 import {
     fetchQuestions,
-} from '../actions.jsx';
+} from '../action/frontend.jsx';
 
 
 class Test extends Component {

@@ -7,8 +7,8 @@ import {
     Route,
 } from 'react-router';
 
-import Index from './container/index.jsx';
-import Test from './container/test.jsx';
+import Index from '../container/index.jsx';
+import Test from '../container/test.jsx';
 
 export default class AppRouter extends Component {
 

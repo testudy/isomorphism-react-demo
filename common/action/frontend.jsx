@@ -3,8 +3,8 @@ import {
     push,
 } from 'react-router-redux';
 
-import constants from './constants.jsx';
-import uri from '../util/uri';
+import constants from '../constants.jsx';
+import uri from '../../util/uri';
 
 const {
     SET_USER,
