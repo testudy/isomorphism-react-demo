@@ -12,8 +12,8 @@ module.exports = {
         loaders: [{
             test: /\.jsx?$/,
             include: [
-                path.resolve(__dirname, 'frontend/static/js'),
-                path.resolve(__dirname, 'frontend/common')
+                path.resolve(__dirname, 'static/js'),
+                path.resolve(__dirname, 'common')
             ],
             exclude: /node_modules/,
             loaders: [
@@ -23,7 +23,7 @@ module.exports = {
         }, {
             test: /\.sass$/,
             include: [
-                path.resolve(__dirname, 'frontend/static/sass'),
+                path.resolve(__dirname, 'static/sass'),
             ],
             loaders: [
                 'style',
@@ -36,7 +36,7 @@ module.exports = {
         }, {
             test: /\.(png|jpg)$/,
             include: [
-                path.resolve(__dirname, 'frontend/static/img'),
+                path.resolve(__dirname, 'static/img'),
             ],
             loaders: [
                 'url?limit=1000'
@@ -44,12 +44,12 @@ module.exports = {
         }]
     },
     entry: {
-        frontend: ['./frontend/static/js/frontend.js'],
-        backend: ['./frontend/static/js/backend.js'],
+        frontend: ['./static/js/frontend.js'],
+        backend: ['./static/js/backend.js'],
         vendors: ['babel-polyfill', 'react', 'react-dom', 'redux', 'react-redux', 'keymirror', 'classnames']
     },
     output: {
-        path: path.resolve(__dirname, './frontend/dist/'),
+        path: path.resolve(__dirname, './dist/'),
         filename: '[name].js',
         publicPath: "/"
     },

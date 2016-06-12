@@ -11,7 +11,7 @@ let config = {
     port: 18080,
     viewDir: path.join(__dirname, '..'),
     logDir: path.join(__dirname, '..', 'log'),
-    feStaticDir: path.join(__dirname, '..', 'frontend/dist'),
+    staticDir: path.join(__dirname, '..', 'dist'),
 
 };
 

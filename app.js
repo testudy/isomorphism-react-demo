@@ -1,7 +1,6 @@
 const path = require('path');
 
 const koa = require('koa');
-const mount = require('koa-mount');
 const config = require('./config/config');
 
 
@@ -18,7 +17,7 @@ onerror(app);
 
 
 const staticCache = require('koa-static-cache');
-app.use(staticCache(config.feStaticDir, {
+app.use(staticCache(config.staticDir, {
     dynamic: true,
 }));
 
@@ -58,9 +57,24 @@ react(app, {
     beautify: true,
 });
 
-const frontend = require('./frontend/app');
 
-app.use(mount('/', frontend));
+const router = require('koa-router')();
+
+const apiRouter = require('./router/api');
+router.use('/api', apiRouter.routes());
+
+const adminRouter = require('./router/admin');
+router.use('/admin', adminRouter.routes());
+
+app.use(router.routes());
+
+
+app.use(function *() {
+    this.render('view/frontend', {
+        title: 'Tea Frontend',
+        csrf: this.csrf,
+    });
+});
 
 
 app.listen(config.port);
