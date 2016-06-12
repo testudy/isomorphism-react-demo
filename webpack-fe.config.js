@@ -44,7 +44,7 @@ module.exports = {
         }]
     },
     entry: {
-        app: ['./frontend/static/js/app.js'],
+        frontend: ['./frontend/static/js/frontend.js'],
         vendors: ['babel-polyfill', 'react', 'react-dom', 'redux', 'react-redux', 'keymirror', 'classnames']
     },
     output: {

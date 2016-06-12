@@ -13,7 +13,7 @@ app.use(router.routes());
 
 
 app.use(function *() {
-    this.render('frontend/view/index', {
+    this.render('frontend/view/frontend', {
         title: 'Tea Frontend',
         csrf: this.csrf,
     });
