@@ -19,6 +19,7 @@ onerror(app);
 const staticCache = require('koa-static-cache');
 app.use(staticCache(config.staticDir, {
     dynamic: true,
+    prefix: 'static',
 }));
 
 
@@ -46,11 +47,7 @@ register({
     ],
 });
 
-// 初步想法
-// 将其放置到具体的app中是较合理的
-// 由于react是向app.context绑定方法，暂时没有办法
-// 将其修改为middleware是较友好的方法
-// 所以，只能多写一层路径了，造成了耦合
+
 const react = require('koa-react-view');
 react(app, {
     views: config.viewDir,
@@ -70,7 +67,7 @@ app.use(router.routes());
 
 
 app.use(function *() {
-    this.render('view/frontend', {
+    this.render('frontend', {
         title: 'Tea Frontend',
         csrf: this.csrf,
     });
