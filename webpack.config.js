@@ -44,8 +44,8 @@ module.exports = {
         }]
     },
     entry: {
-        frontend: ['./static/js/frontend.js'],
-        backend: ['./static/js/backend.js'],
+        frontend: ['./static/js/frontend/app.js'],
+        backend: ['./static/js/backend/app.js'],
         vendors: ['babel-polyfill', 'react', 'react-dom', 'redux', 'react-redux', 'keymirror', 'classnames']
     },
     output: {

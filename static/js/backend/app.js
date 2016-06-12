@@ -9,8 +9,8 @@ import React, {
 import ReactDOM from 'react-dom';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppMenu from '../../common/component/app-menu.jsx';
-import Report from '../../common/component/report.jsx';
+import AppMenu from '../../../common/component/app-menu.jsx';
+import Report from '../../../common/component/report.jsx';
 
 class App extends Component {
 

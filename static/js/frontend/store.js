@@ -12,7 +12,7 @@ import {
 } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 
-import reducers from '../../common/reducers.jsx';
+import reducers from '../../../common/reducers.jsx';
 
 const routerMiddlewareWithBrowserHistory = routerMiddleware(browserHistory);
 

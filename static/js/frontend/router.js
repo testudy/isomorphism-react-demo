@@ -9,7 +9,7 @@ import {
 } from 'react-router-redux';
 
 import store from './store';
-import AppRouter from '../../common/AppRouter.jsx';
+import AppRouter from '../../../common/AppRouter.jsx';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
