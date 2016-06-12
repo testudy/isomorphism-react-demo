@@ -63,14 +63,14 @@ router.use('/api', apiRouter.routes());
 const adminRouter = require('./router/admin');
 router.use('/admin', adminRouter.routes());
 
+const frontendRouter = require('./router/frontend');
+router.use('/', frontendRouter.routes());
+
 app.use(router.routes());
 
 
 app.use(function *() {
-    this.render('frontend', {
-        title: 'Tea Frontend',
-        csrf: this.csrf,
-    });
+    this.redirect('back');
 });
 
 
