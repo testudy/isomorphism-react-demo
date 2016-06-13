@@ -18,9 +18,8 @@ const Layout = React.createClass({
                     <style>{"\
                         html { font-family: Roboto, sans-serif; -webkit-font-smoothing: antialiased; }\
                         body, h1, h2, h3, h4, h5, h6 { margin: 0; }\
-                        body { font-size: 15px; line-height: 24px; }\
+                        body { font-size: 16px; line-height: 24px; }\
                         a { color: #ff4081; text-decoration: none; }\
-                        a:hover { text-decoration: underline; }\
                     "}</style>
                 </head>
                 <body>
