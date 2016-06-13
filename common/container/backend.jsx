@@ -1,6 +1,11 @@
 import React, {
     Component,
 } from 'react';
+import {
+    connect,
+} from 'react-redux';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -19,6 +24,7 @@ export default class Report extends Component {
 
     render() {
         return (
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
             <div>
                 <AppBar
                     title="TEA评测系统"
@@ -36,7 +42,9 @@ export default class Report extends Component {
                     <MenuItem leftIcon={<SocialPeople />}>测评列表</MenuItem>
                     <MenuItem leftIcon={<ActionQuestionAnswer />}>测评题库</MenuItem>
                 </Drawer>
+                {this.props.children}
             </div>
+            </MuiThemeProvider>
         );
     }
 

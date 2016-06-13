@@ -5,9 +5,12 @@ import React, {
 import {
     Router,
     Route,
+    IndexRoute,
 } from 'react-router';
 
+import backend from '../container/backend.jsx';
 import report from '../container/report.jsx';
+import lib from '../container/lib.jsx';
 
 
 export default class BackendRouter extends Component {
@@ -19,8 +22,10 @@ export default class BackendRouter extends Component {
     render() {
         return (
             <Router {...this.props}>
-                <Route path="/backend" component={report} />
-                <Route path="/backend/lib" component={report} />
+                <Route path="/backend" component={backend}>
+                    <IndexRoute component={report} />
+                    <Route path="lib" component={lib} />
+                </Route>
             </Router>
         );
     }

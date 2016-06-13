@@ -4,8 +4,6 @@ import React, {
 import {
     connect,
 } from 'react-redux';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
     Table,
     TableBody,
@@ -21,7 +19,6 @@ class Report extends Component {
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme()}>
             <Table style={{
                 width: '960px',
                 margin: 'auto',
@@ -70,7 +67,6 @@ class Report extends Component {
                     </TableRow>
                 </TableBody>
             </Table>
-            </MuiThemeProvider>
         );
     }
 
