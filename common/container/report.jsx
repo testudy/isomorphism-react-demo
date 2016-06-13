@@ -2,6 +2,11 @@ import React, {
     Component,
 } from 'react';
 import {
+    connect,
+} from 'react-redux';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {
     Table,
     TableBody,
     TableRow,
@@ -12,10 +17,11 @@ import {
 } from 'material-ui/Table';
 
 
-export default class Report extends Component {
+class Report extends Component {
 
     render() {
         return (
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
             <Table style={{
                 width: '960px',
                 margin: 'auto',
@@ -64,7 +70,16 @@ export default class Report extends Component {
                     </TableRow>
                 </TableBody>
             </Table>
+            </MuiThemeProvider>
         );
     }
 
 }
+
+
+function select(state) {
+    return state;
+}
+
+
+export default connect(select)(Report);
