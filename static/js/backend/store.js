@@ -13,13 +13,15 @@ import {
     routerMiddleware,
 } from 'react-router-redux';
 
+import thunkMiddleware from 'redux-thunk';
 
-import reducers from '../../../common/router/Backend.jsx';
+
+import reducers from '../../../common/reducer/Backend.jsx';
 
 
 const routerMiddlewareWithBrowserHistory = routerMiddleware(browserHistory);
 
-const createStoreWithMiddleware = applyMiddleware(routerMiddlewareWithBrowserHistory)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware, routerMiddlewareWithBrowserHistory)(createStore);
 
 
 const store = createStoreWithMiddleware(combineReducers(Object.assign({}, reducers, {
