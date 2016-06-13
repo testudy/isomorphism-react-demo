@@ -2,6 +2,9 @@ import React, {
     Component,
 } from 'react';
 import {
+    Link,
+} from 'react-router';
+import {
     connect,
 } from 'react-redux';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -39,8 +42,8 @@ export default class Report extends Component {
                         title="系统菜单"
                         onLeftIconButtonTouchTap={() => this.handleToggle()}
                     />
-                    <MenuItem leftIcon={<SocialPeople />}>测评列表</MenuItem>
-                    <MenuItem leftIcon={<ActionQuestionAnswer />}>测评题库</MenuItem>
+                    <Link to="/backend/"><MenuItem leftIcon={<SocialPeople />}>测评列表</MenuItem></Link>
+                    <Link to="/backend/lib"><MenuItem leftIcon={<ActionQuestionAnswer />}>测评题库</MenuItem></Link>
                 </Drawer>
                 {this.props.children}
             </div>
