@@ -10,6 +10,8 @@ import {
     CardHeader,
     CardText,
 } from 'material-ui/Card';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import {
     RadioButton,
     RadioButtonGroup,
@@ -19,6 +21,9 @@ import Paper from 'material-ui/Paper';
 import {
     fetchLib,
 } from '../action/backend.jsx';
+import CreateQuestion from '../component/CreateQuestion.jsx';
+
+import style from '../style';
 
 
 class Lib extends Component {
@@ -29,6 +34,7 @@ class Lib extends Component {
     }
 
     render() {
+
         const questions = this.props.lib.map((question, index) => {
             let image = null;
 
@@ -93,16 +99,56 @@ class Lib extends Component {
                     }}>
                         {options}
                     </CardActions>
+                    <CardActions style={style.cardActions}>
+                        <RaisedButton
+                            label="编辑题目"
+                            labelPosition="after"
+                            labelStyle={{
+                                verticalAlign: 'middle',
+                            }}
+                            primary={true}
+                            onClick={(event) => this.submit()}
+                        />
+                        <RaisedButton
+                            label="删除题目"
+                            labelPosition="after"
+                            labelStyle={{
+                                verticalAlign: 'middle',
+                            }}
+                            primary={true}
+                            onClick={(event) => this.submit()}
+                        />
+                    </CardActions>
                 </Card>
             );
         });
 
         return (
-            <Paper style={{
-                width: '960px',
-                margin: 'auto',
-            }}>
+            <Paper style={style.container}>
                 {questions}
+                <Card style={style.card}>
+                    <CardActions style={style.cardActions}>
+                    <RaisedButton
+                        label="新建单选题目"
+                        labelPosition="after"
+                        labelStyle={{
+                            verticalAlign: 'middle',
+                        }}
+                        primary={true}
+                        onClick={(event) => this.submit()}
+                    />
+                    <RaisedButton
+                        label="新建多选题目"
+                        labelPosition="after"
+                        labelStyle={{
+                            verticalAlign: 'middle',
+                        }}
+                        primary={true}
+                        onClick={(event) => this.submit()}
+                    />
+                    </CardActions>
+                </Card>
+                <CreateQuestion />
             </Paper>
         );
     }

@@ -10,10 +10,12 @@ import {
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
+import Paper from 'material-ui/Paper';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import SocialPeople from 'material-ui/svg-icons/social/people';
 import ActionQuestionAnswer from 'material-ui/svg-icons/action/question-answer';
+import style from '../style';
 
 
 export default class Report extends Component {
@@ -29,10 +31,14 @@ export default class Report extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
             <div>
-                <AppBar
-                    title="TEA评测系统"
-                    onLeftIconButtonTouchTap={() => this.handleToggle()}
-                />
+                <Paper style={style.header}
+                    zDepth={2}
+                >
+                    <AppBar
+                        title="TEA评测系统"
+                        onLeftIconButtonTouchTap={() => this.handleToggle()}
+                    />
+                </Paper>
                 <Drawer
                     open={this.state.open}
                     docked={false}
