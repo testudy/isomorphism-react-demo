@@ -34,7 +34,6 @@ const style = {
         position: 'absolute',
         right: 0,
         top: '-12px',
-        
     },
 
     fileButton: {

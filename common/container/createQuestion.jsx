@@ -19,6 +19,10 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 import style from '../style';
 
@@ -108,11 +112,38 @@ class CreateQuestion extends Component {
             options = this.state.options.map((option, index) => {
                 const number = String.fromCharCode('A'.charCodeAt(0) + index);
                 return (
-                    <Checkbox key={`option-${index}`}
-                        defaultChecked={option.checked}
-                        value={`${index}`}
-                        label={`${number}、${option.text}`}
-                    />
+                    <div style={{
+                        position: 'relative',
+                    }}>
+                        <Checkbox key={`option-${index}`}
+                            defaultChecked={option.checked}
+                            value={`${index}`}
+                            label={`${number}、${option.text}`}
+                        />
+                        <IconMenu
+                            style={{
+                                position: 'absolute',
+                                right: 0,
+                                top: 0,
+                                zIndex: 10,
+                            }}
+                            iconButtonElement={<IconButton style={{
+                                width: '24px',
+                                height: '24px',
+                                padding: '0',
+                                border: 'none',
+                            }}><MoreVertIcon /></IconButton>}
+                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                            >
+                            <MenuItem primaryText="修改" onTouchTap={()=>{
+                                alert('修改');
+                            }}/>
+                            <MenuItem primaryText="删除"  onTouchTap={()=>{
+                                alert('删除');
+                            }}/>
+                        </IconMenu>
+                    </div>
                 );
             });
         } else {
