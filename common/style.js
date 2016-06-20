@@ -30,6 +30,13 @@ const style = {
         margin: '16px 0',
     },
 
+    cardHeaderMenu: {
+        position: 'absolute',
+        right: 0,
+        top: '-12px',
+        
+    },
+
     fileButton: {
         position: 'absolute',
         top: 0,

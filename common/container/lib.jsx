@@ -18,10 +18,13 @@ import {
 } from 'material-ui/RadioButton';
 import Checkbox from 'material-ui/Checkbox';
 import Paper from 'material-ui/Paper';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {
     fetchLib,
 } from '../action/backend.jsx';
-import CreateQuestion from '../component/CreateQuestion.jsx';
 
 import style from '../style';
 
@@ -91,6 +94,21 @@ class Lib extends Component {
                             padding: 0,
                             margin: '0 0 16px 0',
                         }}
+                        children={
+                            <IconMenu
+                                style={style.cardHeaderMenu}
+                                iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                                targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                                >
+                                <MenuItem primaryText="修改" onTouchTap={()=>{
+                                    alert('修改');
+                                }}/>
+                                <MenuItem primaryText="删除"  onTouchTap={()=>{
+                                    alert('删除');
+                                }}/>
+                            </IconMenu>
+                        }
                     />
                     {image}
                     <CardActions style={{
@@ -101,7 +119,18 @@ class Lib extends Component {
                     </CardActions>
                     <CardActions style={style.cardActions}>
                         <RaisedButton
-                            label="编辑题目"
+                            label="添加或替换图片"
+                            labelPosition="before"
+                            labelStyle={{
+                                verticalAlign: 'middle',
+                            }}
+                            primary={true}
+                            onClick={(event) => this.submit()}
+                        >
+                            <input type="file" style={style.fileButton} />
+                        </RaisedButton>
+                        <RaisedButton
+                            label="保存修改"
                             labelPosition="after"
                             labelStyle={{
                                 verticalAlign: 'middle',
@@ -110,7 +139,7 @@ class Lib extends Component {
                             onClick={(event) => this.submit()}
                         />
                         <RaisedButton
-                            label="删除题目"
+                            label="放弃修改"
                             labelPosition="after"
                             labelStyle={{
                                 verticalAlign: 'middle',
@@ -126,29 +155,6 @@ class Lib extends Component {
         return (
             <Paper style={style.container}>
                 {questions}
-                <Card style={style.card}>
-                    <CardActions style={style.cardActions}>
-                    <RaisedButton
-                        label="新建单选题目"
-                        labelPosition="after"
-                        labelStyle={{
-                            verticalAlign: 'middle',
-                        }}
-                        primary={true}
-                        onClick={(event) => this.submit()}
-                    />
-                    <RaisedButton
-                        label="新建多选题目"
-                        labelPosition="after"
-                        labelStyle={{
-                            verticalAlign: 'middle',
-                        }}
-                        primary={true}
-                        onClick={(event) => this.submit()}
-                    />
-                    </CardActions>
-                </Card>
-                <CreateQuestion />
             </Paper>
         );
     }

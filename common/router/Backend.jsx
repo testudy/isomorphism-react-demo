@@ -11,6 +11,7 @@ import {
 import backend from '../container/backend.jsx';
 import report from '../container/report.jsx';
 import lib from '../container/lib.jsx';
+import createQuestion from '../container/createQuestion.jsx';
 
 
 export default class BackendRouter extends Component {
@@ -25,6 +26,7 @@ export default class BackendRouter extends Component {
                 <Route path="/backend" component={backend}>
                     <IndexRoute component={report} />
                     <Route path="lib" component={lib} />
+                    <Route path="lib/create/:isMulti" component={createQuestion} />
                 </Route>
             </Router>
         );

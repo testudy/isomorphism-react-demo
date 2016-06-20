@@ -14,7 +14,9 @@ import Paper from 'material-ui/Paper';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import SocialPeople from 'material-ui/svg-icons/social/people';
-import ActionQuestionAnswer from 'material-ui/svg-icons/action/question-answer';
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import ContentAddCircle from 'material-ui/svg-icons/content/add-circle';
+import ContentAddBox from 'material-ui/svg-icons/content/add-box';
 import style from '../style';
 
 
@@ -49,7 +51,9 @@ export default class Report extends Component {
                         onLeftIconButtonTouchTap={() => this.handleToggle()}
                     />
                     <Link to="/backend/"><MenuItem leftIcon={<SocialPeople />}>测评列表</MenuItem></Link>
-                    <Link to="/backend/lib"><MenuItem leftIcon={<ActionQuestionAnswer />}>测评题库</MenuItem></Link>
+                    <Link to="/backend/lib"><MenuItem leftIcon={<ContentInbox />}>测评题库</MenuItem></Link>
+                    <Link to="/backend/lib/create/0"><MenuItem leftIcon={<ContentAddCircle />}>添加单选题</MenuItem></Link>
+                    <Link to="/backend/lib/create/1"><MenuItem leftIcon={<ContentAddBox />}>添加多选题</MenuItem></Link>
                 </Drawer>
                 {this.props.children}
             </div>

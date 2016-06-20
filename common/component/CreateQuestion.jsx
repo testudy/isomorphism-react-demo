@@ -69,7 +69,7 @@ export default class CreateQuestion extends Component {
                 </CardText>
                 <CardActions style={style.cardActions}>
                     <RaisedButton
-                        label="上传图片"
+                        label="上传或替换图片"
                         labelPosition="before"
                         labelStyle={{
                             verticalAlign: 'middle',
