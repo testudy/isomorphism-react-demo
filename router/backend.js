@@ -14,7 +14,7 @@ router.get('/lib', function *() {
     });
 });
 
-router.get('/lib/create/:isMulti', function *() {
+router.get('/lib/create/:multi', function *() {
     this.render('backend', {
         title: 'Tea Frontend Backend',
         csrf: this.csrf,

@@ -26,7 +26,7 @@ export default class BackendRouter extends Component {
                 <Route path="/backend" component={backend}>
                     <IndexRoute component={report} />
                     <Route path="lib" component={lib} />
-                    <Route path="lib/create/:isMulti" component={createQuestion} />
+                    <Route path="lib/create/:multi" component={createQuestion} />
                 </Route>
             </Router>
         );

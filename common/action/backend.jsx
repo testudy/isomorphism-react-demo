@@ -7,10 +7,19 @@ import constants from '../constants.jsx';
 import uri from '../../util/uri';
 
 const {
+    SET_QUESTION,
     FETCH_Lib_REQUEST,
     FETCH_Lib_SUCCESS,
     FETCH_Lib_FAILURE,
 } = constants;
+
+
+export function setQuestion(question) {
+    return {
+        type: SET_QUESTION,
+        question,
+    };
+}
 
 
 export function fetchLib() {
