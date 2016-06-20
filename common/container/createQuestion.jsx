@@ -35,6 +35,7 @@ class CreateQuestion extends Component {
             title: '',
             titleErrorText: '',
             image: '',
+            imageFile: null,
             options: [
                 {
                     text: '纸币',
@@ -105,6 +106,17 @@ class CreateQuestion extends Component {
         }
     }
 
+
+    handleImage(image) {
+        console.log(image);
+        if (image) {
+            this.setState({
+                image: window.URL.createObjectURL(image),
+                imageFile: image,
+            });
+        }
+    }
+
     render() {
 
         let options = null;
@@ -167,6 +179,24 @@ class CreateQuestion extends Component {
             );
         }
 
+        let image = null;
+
+        if (this.state.image) {
+            image = (
+                <CardText style={{
+                    padding: 0,
+                    margin: '16px 0',
+                }}>
+                    <img
+                        style={{
+                            maxWidth: '100%',
+                        }}
+                        src={this.state.image}
+                    />
+                </CardText>
+            );
+        }
+
         return (
             <Paper style={style.container}>
                 <Card style={style.card}>
@@ -184,6 +214,7 @@ class CreateQuestion extends Component {
                             multiLine={true}
                             rows={2}
                         />
+                        {image}
                         {options}
                         <br />
                         <TextField
@@ -214,7 +245,9 @@ class CreateQuestion extends Component {
                             primary={true}
                             onClick={(event) => this.submit()}
                         >
-                            <input type="file" style={style.fileButton} />
+                            <input type="file" accept="image/*"
+                                onChange={(event) => this.handleImage(event.target.files[0])}
+                                style={style.fileButton} />
                         </RaisedButton>
                         <RaisedButton
                             label="保存题目"
