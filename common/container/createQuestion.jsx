@@ -40,18 +40,65 @@ class CreateQuestion extends Component {
                     text: '相机',
                     checked: true,
                 },
-                {
-                    text: '两个都选',
-                    checked: false,
-                },
-                {
-                    text: '都不选，找食物',
-                    checked: false,
-                },
             ],
+            option: '',
             optionsErrorText: '',
             multi: !!parseInt(this.props.params.multi, 10),
         };
+    }
+
+    handleOption(option) {
+        option = option.trim();
+        this.setState({
+            option,
+        });
+    }
+
+    hasOption(text) {
+        return !!this.state.options.find((option) => {
+            return option.text === text;
+        });
+    }
+
+    validateOption() {
+        if (this.state.option.length === 0) {
+            this.setState({
+                optionsErrorText: '请填写选项',
+            });
+            return false;
+        }
+        if (this.hasOption(this.state.option)) {
+            this.setState({
+                optionsErrorText: '请重新填写选项，选项重复',
+            });
+            return false;
+        }
+
+        this.setState({
+            optionsErrorText: '',
+        });
+        return true;
+
+    }
+
+    addOption() {
+        if (this.validateOption()) {
+            const option = this.state.option;
+            this.setState({
+                options: [...this.state.options].concat({
+                    text: option,
+                    checked: false,
+                }),
+                option: '',
+            });
+            console.log(this.state.option);
+        }
+    }
+
+    handleKeyDown(keyCode) {
+        if (keyCode === 13) {
+            this.addOption();
+        }
     }
 
     render() {
@@ -112,7 +159,9 @@ class CreateQuestion extends Component {
                             hintText="相机"
                             errorText={this.state.optionsErrorText}
                             floatingLabelText="请输入选项"
-                            defaultValue={this.state.phone}
+                            value={this.state.option}
+                            onChange={(event) => this.handleOption(event.target.value)}
+                            onKeyDown={(event) => this.handleKeyDown(event.keyCode)}
                         />
                         <FlatButton
                             label="添加选项"
@@ -121,7 +170,7 @@ class CreateQuestion extends Component {
                                 verticalAlign: 'middle',
                             }}
                             secondary={true}
-                            onClick={(event) => this.submit()}
+                            onClick={() => this.addOption()}
                         />
                     </CardText>
                     <CardActions style={style.cardActions}>
