@@ -20,7 +20,7 @@ import ContentAddBox from 'material-ui/svg-icons/content/add-box';
 import style from '../style';
 
 
-export default class Report extends Component {
+export default class Backend extends Component {
 
     constructor(props) {
         super(props);
