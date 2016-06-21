@@ -70,7 +70,6 @@ class CreateQuestion extends Component {
 
     }
 
-
     stringifyOptions(options) {
         return options.map((option) => {
             return option.text;
@@ -98,9 +97,9 @@ class CreateQuestion extends Component {
     }
 
     validateOption() {
-        if (this.state.optionsText.length === 0) {
+        if (this.state.options.length <= 1) {
             this.setState({
-                optionsErrorText: '请填写选项',
+                optionsErrorText: '请填写至少两个选项',
             });
             return false;
         }
@@ -116,15 +115,9 @@ class CreateQuestion extends Component {
         this.setState({
             optionsText,
         });
-    }
-
-    updateOptions() {
-        if (this.validateOption()) {
-            const optionsText = this.state.optionsText;
-            this.setState({
-                options: this.parseOptions(optionsText),
-            });
-        }
+        this.setState({
+            options: this.parseOptions(optionsText),
+        });
     }
 
     handleOptions(selectedIndex) {
@@ -237,15 +230,6 @@ class CreateQuestion extends Component {
                         />
                     </CardText>
                     <CardActions style={style.cardActions}>
-                        <RaisedButton
-                            label="添加或更新选项"
-                            labelPosition="before"
-                            labelStyle={{
-                                verticalAlign: 'middle',
-                            }}
-                            primary={true}
-                            onClick={() => this.updateOptions()}
-                        />
                         <RaisedButton
                             label="添加或更新图片"
                             labelPosition="before"
