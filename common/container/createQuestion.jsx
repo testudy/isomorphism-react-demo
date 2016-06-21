@@ -49,6 +49,28 @@ class CreateQuestion extends Component {
         this.state.optionsText = this.stringifyOptions(this.state.options);
     }
 
+    handleTitle(title) {
+        this.setState({
+            title,
+        });
+    }
+
+    validateTitle() {
+        if (this.state.title.length === 0) {
+            this.setState({
+                titleErrorText: '请填写题面',
+            });
+            return false;
+        }
+
+        this.setState({
+            titleErrorText: '',
+        });
+        return true;
+
+    }
+
+
     stringifyOptions(options) {
         return options.map((option) => {
             return option.text;
@@ -73,10 +95,6 @@ class CreateQuestion extends Component {
         return this.state.options.find((option) => {
             return option.text === optionText;
         });
-    }
-
-    hasOption(optionText) {
-        return !!this.findOption(optionText);
     }
 
     validateOption() {
@@ -203,6 +221,7 @@ class CreateQuestion extends Component {
                             value={this.state.title}
                             multiLine={true}
                             rows={1}
+                            onChange={(event) => this.handleTitle(event.target.value) }
                         />
                         {image}
                         {options}
