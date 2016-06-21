@@ -21,27 +21,25 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import style from '../style';
+import {
+    setQuestion,
+} from '../action/backend.jsx';
 
 
 class CreateQuestion extends Component {
 
     constructor(props) {
         super(props);
+        this.initState();
+    }
+
+    initState() {
         this.state = {
             title: '',
             titleErrorText: '',
             image: '',
             imageFile: null,
-            options: [
-                {
-                    text: '纸币',
-                    checked: false,
-                },
-                {
-                    text: '相机',
-                    checked: true,
-                },
-            ],
+            options: [],
             optionsText: '',
             optionsErrorText: '',
             multi: !!parseInt(this.props.params.multi, 10),
@@ -96,7 +94,7 @@ class CreateQuestion extends Component {
         });
     }
 
-    validateOption() {
+    validateOptions() {
         if (this.state.options.length <= 1) {
             this.setState({
                 optionsErrorText: '请填写至少两个选项',
@@ -138,6 +136,18 @@ class CreateQuestion extends Component {
                 image: window.URL.createObjectURL(image),
                 imageFile: image,
             });
+        }
+    }
+
+    submit() {
+        if (this.validateTitle() && this.validateOptions()) {
+            window.URL.revokeObjectURL(this.state.image);
+            this.props.dispatch(setQuestion({
+                title: this.state.title,
+                image: this.state.imageFile,
+                options: this.state.options,
+                multi: this.state.multi,
+            }));
         }
     }
 
@@ -259,7 +269,7 @@ class CreateQuestion extends Component {
                                 verticalAlign: 'middle',
                             }}
                             secondary={true}
-                            onClick={(event) => this.submit()}
+                            onClick={(event) => this.cancel()}
                         />
                     </CardActions>
                 </Card>
