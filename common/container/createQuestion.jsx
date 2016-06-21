@@ -19,10 +19,6 @@ import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton/IconButton';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 import style from '../style';
 
@@ -46,35 +42,47 @@ class CreateQuestion extends Component {
                     checked: true,
                 },
             ],
-            option: '',
+            optionsText: '',
             optionsErrorText: '',
             multi: !!parseInt(this.props.params.multi, 10),
         };
+        this.state.optionsText = this.stringifyOptions(this.state.options);
     }
 
-    handleOption(option) {
-        option = option.trim();
-        this.setState({
-            option,
+    stringifyOptions(options) {
+        return options.map((option) => {
+            return option.text;
+        }).join('\n');
+    }
+
+    parseOptions(optionsText) {
+        return optionsText.split(/[\n\r]/).map((optionText) => {
+            optionText = optionText.trim();
+            if (optionText.length === 0) {
+                return;
+            }
+            const oldOption = this.findOption(optionText);
+            return {
+                text: optionText,
+                checked: oldOption && oldOption.checked,
+            };
+        }).filter((option) => !!option);
+    }
+
+    findOption(optionText) {
+        return this.state.options.find((option) => {
+            return option.text === optionText;
         });
     }
 
-    hasOption(text) {
-        return !!this.state.options.find((option) => {
-            return option.text === text;
-        });
+    hasOption(optionText) {
+        return !!this.findOption(optionText);
     }
 
     validateOption() {
-        if (this.state.option.length === 0) {
+        if (this.state.optionsText.length === 0) {
             this.setState({
                 optionsErrorText: '请填写选项',
-            });
-            return false;
-        }
-        if (this.hasOption(this.state.option)) {
-            this.setState({
-                optionsErrorText: '请重新填写选项，选项重复',
             });
             return false;
         }
@@ -86,29 +94,22 @@ class CreateQuestion extends Component {
 
     }
 
-    addOption() {
+    handleOptionsText(optionsText) {
+        this.setState({
+            optionsText,
+        });
+    }
+
+    updateOptions() {
         if (this.validateOption()) {
-            const option = this.state.option;
+            const optionsText = this.state.optionsText;
             this.setState({
-                options: [...this.state.options].concat({
-                    text: option,
-                    checked: false,
-                }),
-                option: '',
+                options: this.parseOptions(optionsText),
             });
-            console.log(this.state.option);
         }
     }
-
-    handleKeyDown(keyCode) {
-        if (keyCode === 13) {
-            this.addOption();
-        }
-    }
-
 
     handleImage(image) {
-        console.log(image);
         if (image) {
             this.setState({
                 image: window.URL.createObjectURL(image),
@@ -124,38 +125,11 @@ class CreateQuestion extends Component {
             options = this.state.options.map((option, index) => {
                 const number = String.fromCharCode('A'.charCodeAt(0) + index);
                 return (
-                    <div style={{
-                        position: 'relative',
-                    }}>
-                        <Checkbox key={`option-${index}`}
-                            defaultChecked={option.checked}
-                            value={`${index}`}
-                            label={`${number}、${option.text}`}
-                        />
-                        <IconMenu
-                            style={{
-                                position: 'absolute',
-                                right: 0,
-                                top: 0,
-                                zIndex: 10,
-                            }}
-                            iconButtonElement={<IconButton style={{
-                                width: '24px',
-                                height: '24px',
-                                padding: '0',
-                                border: 'none',
-                            }}><MoreVertIcon /></IconButton>}
-                            anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                            >
-                            <MenuItem primaryText="修改" onTouchTap={()=>{
-                                alert('修改');
-                            }}/>
-                            <MenuItem primaryText="删除"  onTouchTap={()=>{
-                                alert('删除');
-                            }}/>
-                        </IconMenu>
-                    </div>
+                    <Checkbox key={`option-${index}`}
+                        defaultChecked={option.checked}
+                        value={`${index}`}
+                        label={`${number}、${option.text}`}
+                    />
                 );
             });
         } else {
@@ -210,9 +184,9 @@ class CreateQuestion extends Component {
                             hintText="有人为了测试大猩猩聪明程度，特地在大猩猩面前放了一叠百元纸币和一部相机，请问猩猩会选哪个？"
                             errorText={this.state.titleErrorText}
                             floatingLabelText="请输入题面"
-                            defaultValue={this.state.title}
+                            value={this.state.title}
                             multiLine={true}
-                            rows={2}
+                            rows={1}
                         />
                         {image}
                         {options}
@@ -221,21 +195,22 @@ class CreateQuestion extends Component {
                             hintText="相机"
                             errorText={this.state.optionsErrorText}
                             floatingLabelText="请输入选项"
-                            value={this.state.option}
-                            onChange={(event) => this.handleOption(event.target.value)}
-                            onKeyDown={(event) => this.handleKeyDown(event.keyCode)}
-                        />
-                        <FlatButton
-                            label="添加选项"
-                            labelPosition="after"
-                            labelStyle={{
-                                verticalAlign: 'middle',
-                            }}
-                            secondary={true}
-                            onClick={() => this.addOption()}
+                            value={this.state.optionsText}
+                            multiLine={true}
+                            rows={1}
+                            onChange={(event) => this.handleOptionsText(event.target.value)}
                         />
                     </CardText>
                     <CardActions style={style.cardActions}>
+                        <RaisedButton
+                            label="更新选项"
+                            labelPosition="before"
+                            labelStyle={{
+                                verticalAlign: 'middle',
+                            }}
+                            primary={true}
+                            onClick={() => this.updateOptions()}
+                        />
                         <RaisedButton
                             label="上传或替换图片"
                             labelPosition="before"
@@ -243,11 +218,11 @@ class CreateQuestion extends Component {
                                 verticalAlign: 'middle',
                             }}
                             primary={true}
-                            onClick={(event) => this.submit()}
                         >
                             <input type="file" accept="image/*"
                                 onChange={(event) => this.handleImage(event.target.files[0])}
-                                style={style.fileButton} />
+                                style={style.fileButton}
+                            />
                         </RaisedButton>
                         <RaisedButton
                             label="保存题目"
@@ -264,7 +239,7 @@ class CreateQuestion extends Component {
                             labelStyle={{
                                 verticalAlign: 'middle',
                             }}
-                            primary={true}
+                            secondary={true}
                             onClick={(event) => this.submit()}
                         />
                     </CardActions>
