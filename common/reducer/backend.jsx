@@ -1,7 +1,7 @@
 import constants from '../constants.jsx';
 
 const {
-    SET_QUESTION,
+    CREATE_QUESTION_SUCCESS,
     FETCH_Lib_SUCCESS,
 } = constants;
 
@@ -11,7 +11,7 @@ const {
  * @return {Array} Lib
  */
 function question(state = {}, action) {
-    if (action.type === SET_QUESTION) {
+    if (action.type === CREATE_QUESTION_SUCCESS) {
         return Object.assign({}, action.question);
     }
     return state;

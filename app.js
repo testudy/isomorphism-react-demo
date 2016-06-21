@@ -27,8 +27,8 @@ const session = require('koa-generic-session');
 app.use(session(app));
 
 
-const bodyParser = require('koa-bodyparser');
-app.use(bodyParser());
+//const bodyParser = require('koa-bodyparser');
+//app.use(bodyParser());
 
 
 //const csrf = require('koa-csrf');

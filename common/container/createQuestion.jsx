@@ -25,7 +25,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import style from '../style';
 import {
-    setQuestion,
+    createQuestion,
 } from '../action/backend.jsx';
 
 
@@ -86,7 +86,7 @@ class CreateQuestion extends Component {
             const oldOption = this.findOption(optionText);
             return {
                 text: optionText,
-                checked: oldOption && oldOption.checked,
+                checked: !!(oldOption && oldOption.checked),
             };
         }).filter((option) => !!option);
     }
@@ -101,6 +101,15 @@ class CreateQuestion extends Component {
         if (this.state.options.length <= 1) {
             this.setState({
                 optionsErrorText: '请填写至少两个选项',
+            });
+            return false;
+        }
+        const hasSelected = !!this.state.options.find((option) => {
+            return option.checked;
+        });
+        if (!hasSelected) {
+            this.setState({
+                optionsErrorText: '请填写勾选一个选项',
             });
             return false;
         }
@@ -145,7 +154,7 @@ class CreateQuestion extends Component {
     submit() {
         if (this.validateTitle() && this.validateOptions()) {
             window.URL.revokeObjectURL(this.state.image);
-            this.props.dispatch(setQuestion({
+            this.props.dispatch(createQuestion({
                 title: this.state.title,
                 image: this.state.imageFile,
                 options: this.state.options,
