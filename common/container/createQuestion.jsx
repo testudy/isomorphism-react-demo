@@ -4,6 +4,9 @@ import React, {
 import {
     connect,
 } from 'react-redux';
+import {
+    push,
+} from 'react-router-redux';
 import Paper from 'material-ui/Paper';
 import {
     Card,
@@ -149,6 +152,10 @@ class CreateQuestion extends Component {
                 multi: this.state.multi,
             }));
         }
+    }
+
+    cancel() {
+        this.props.dispatch(push('/backend/lib'));
     }
 
     render() {
