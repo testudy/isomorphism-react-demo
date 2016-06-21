@@ -109,6 +109,18 @@ class CreateQuestion extends Component {
         }
     }
 
+    handleOptions(selectedIndex) {
+        const options = this.state.options.map((option, index) => {
+            return {
+                text: option.text,
+                checked: index === selectedIndex,
+            };
+        });
+        this.setState({
+            options: options,
+        });
+    }
+
     handleImage(image) {
         if (image) {
             this.setState({
@@ -139,6 +151,10 @@ class CreateQuestion extends Component {
             options = (
                 <RadioButtonGroup name={`options`}
                     valueSelected={String(valueSelected)}
+                    onChange={(event, value) => {
+                        const selectedIndex = parseInt(value, 10);
+                        this.handleOptions(selectedIndex);
+                    }}
                 >
                     {this.state.options.map((option, index) => {
                         const number = String.fromCharCode('A'.charCodeAt(0) + index);
