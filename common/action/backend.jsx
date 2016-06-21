@@ -22,8 +22,6 @@ export function createQuestion(question) {
             type: CREATE_QUESTION_REQUEST,
         });
 
-        console.log(question);
-
         const body = new FormData();
         body.append('question', JSON.stringify(question));
         body.append('image', question.image);
@@ -39,6 +37,7 @@ export function createQuestion(question) {
                 type: CREATE_QUESTION_SUCCESS,
                 question: json,
             });
+            dispatch(push('/backend/lib'));
         }).catch((error) => {
             dispatch({
                 type: CREATE_QUESTION_FAILURE,
