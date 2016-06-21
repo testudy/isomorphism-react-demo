@@ -219,7 +219,7 @@ class CreateQuestion extends Component {
                     </CardText>
                     <CardActions style={style.cardActions}>
                         <RaisedButton
-                            label="更新选项"
+                            label="添加或更新选项"
                             labelPosition="before"
                             labelStyle={{
                                 verticalAlign: 'middle',
@@ -228,7 +228,7 @@ class CreateQuestion extends Component {
                             onClick={() => this.updateOptions()}
                         />
                         <RaisedButton
-                            label="上传或替换图片"
+                            label="添加或更新图片"
                             labelPosition="before"
                             labelStyle={{
                                 verticalAlign: 'middle',
@@ -250,7 +250,7 @@ class CreateQuestion extends Component {
                             onClick={(event) => this.submit()}
                         />
                         <RaisedButton
-                            label="放弃保存"
+                            label="放弃题目"
                             labelPosition="after"
                             labelStyle={{
                                 verticalAlign: 'middle',
