@@ -109,7 +109,7 @@ class CreateQuestion extends Component {
         });
         if (!hasSelected) {
             this.setState({
-                optionsErrorText: '请填写勾选一个选项',
+                optionsErrorText: '请勾选至少一个选项',
             });
             return false;
         }
@@ -176,8 +176,10 @@ class CreateQuestion extends Component {
                 return (
                     <Checkbox key={`option-${index}`}
                         defaultChecked={option.checked}
-                        value={`${index}`}
                         label={`${number}、${option.text}`}
+                        onCheck={(event) => {
+                            option.checked = event.target.checked;
+                        }}
                     />
                 );
             });
