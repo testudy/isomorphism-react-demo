@@ -36,6 +36,12 @@ class CreateQuestion extends Component {
         this.initState();
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.params.multi !== this.props.params.multi) {
+            this.initState();
+        }
+    }
+
     initState() {
         this.state = {
             title: '',
@@ -174,7 +180,7 @@ class CreateQuestion extends Component {
             options = this.state.options.map((option, index) => {
                 const number = String.fromCharCode('A'.charCodeAt(0) + index);
                 return (
-                    <Checkbox key={`option-${index}`}
+                    <Checkbox key={`option-checkbox-${index}`}
                         defaultChecked={option.checked}
                         label={`${number}、${option.text}`}
                         onCheck={(event) => {
@@ -198,7 +204,7 @@ class CreateQuestion extends Component {
                     {this.state.options.map((option, index) => {
                         const number = String.fromCharCode('A'.charCodeAt(0) + index);
                         return (
-                            <RadioButton key={`option-${index}`}
+                            <RadioButton key={`option-radio-${index}`}
                                 value={`${index}`}
                                 label={`${number}、${option.text}`}
                             />
