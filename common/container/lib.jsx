@@ -63,19 +63,24 @@ class Lib extends Component {
                 options = question.options.map((option, index) => {
                     const number = String.fromCharCode('A'.charCodeAt(0) + index);
                     return (
-                        <Checkbox key={`option${question._id}-${index}`}
-                            value={`${index}`}
+                        <Checkbox key={`option-checkbox-${question._id}-${index}`}
+                            disabled={true}
+                            defaultChecked={option.checked}
                             label={`${number}、${option.text}`}
                         />
                     );
                 });
             } else {
+                let defaultSelected = question.options.findIndex((option) => {
+                    return option.checked;
+                });
                 options = (
-                    <RadioButtonGroup name={`question${question._id}`}>
+                    <RadioButtonGroup name={`question${question._id}`} defaultSelected={`${defaultSelected}`}>
                         {question.options.map((option, index) => {
                             const number = String.fromCharCode('A'.charCodeAt(0) + index);
                             return (
-                                <RadioButton key={`option${question._id}-${index}`}
+                                <RadioButton key={`option-radio-${question._id}-${index}`}
+                                    disabled={true}
                                     value={`${index}`}
                                     label={`${number}、${option.text}`}
                                 />
@@ -117,37 +122,6 @@ class Lib extends Component {
                         margin: '16px 0',
                     }}>
                         {options}
-                    </CardActions>
-                    <CardActions style={style.cardActions}>
-                        <RaisedButton
-                            label="添加或替换图片"
-                            labelPosition="before"
-                            labelStyle={{
-                                verticalAlign: 'middle',
-                            }}
-                            primary={true}
-                            onClick={(event) => this.submit()}
-                        >
-                            <input type="file" style={style.fileButton} />
-                        </RaisedButton>
-                        <RaisedButton
-                            label="保存修改"
-                            labelPosition="after"
-                            labelStyle={{
-                                verticalAlign: 'middle',
-                            }}
-                            primary={true}
-                            onClick={(event) => this.submit()}
-                        />
-                        <RaisedButton
-                            label="放弃修改"
-                            labelPosition="after"
-                            labelStyle={{
-                                verticalAlign: 'middle',
-                            }}
-                            primary={true}
-                            onClick={(event) => this.submit()}
-                        />
                     </CardActions>
                 </Card>
             );
