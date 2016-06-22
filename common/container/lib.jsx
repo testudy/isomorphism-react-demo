@@ -51,7 +51,7 @@ class Lib extends Component {
                             style={{
                                 maxWidth: '100%',
                             }}
-                            src={question.image}
+                            src={`/${question.image}`}
                         />
                     </CardText>
                 );

@@ -13,8 +13,8 @@ export default class Index extends Component {
         return (
             <Layout title={this.props.title}>
                 <div id="app" />
-                <script src="/static/vendors.js"></script>
-                <script src="/static/frontend.js"></script>
+                <script src="/public/dist/vendors.js"></script>
+                <script src="/public/dist/frontend.js"></script>
             </Layout>
         );
 

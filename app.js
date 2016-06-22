@@ -19,7 +19,7 @@ onerror(app);
 const staticCache = require('koa-static-cache');
 app.use(staticCache(config.staticDir, {
     dynamic: true,
-    prefix: 'static',
+    prefix: 'public',
 }));
 
 

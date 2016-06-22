@@ -49,7 +49,7 @@ module.exports = {
         vendors: ['babel-polyfill', 'react', 'react-dom', 'redux', 'react-redux', 'keymirror', 'classnames']
     },
     output: {
-        path: path.resolve(__dirname, './dist/'),
+        path: path.resolve(__dirname, './public/dist/'),
         filename: '[name].js',
         publicPath: "/"
     },
