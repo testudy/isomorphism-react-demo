@@ -46,6 +46,7 @@ class Lib extends Component {
                     <CardText style={{
                         padding: 0,
                         margin: '16px 0',
+                        textAlign: 'center',
                     }}>
                         <img
                             style={{
