@@ -64,7 +64,7 @@ class Lib extends Component {
                     return (
                         <Checkbox key={`option${question._id}-${index}`}
                             value={`${index}`}
-                            label={`${number}、${option}`}
+                            label={`${number}、${option.text}`}
                         />
                     );
                 });
@@ -76,7 +76,7 @@ class Lib extends Component {
                             return (
                                 <RadioButton key={`option${question._id}-${index}`}
                                     value={`${index}`}
-                                    label={`${number}、${option}`}
+                                    label={`${number}、${option.text}`}
                                 />
                             );
                         })}

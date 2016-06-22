@@ -43,6 +43,9 @@ module.exports = {
             const question = JSON.parse(parts.field.question);
             question.image = imagePath;
             console.log(question);
+            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const questions = db.collection('questions');
+            yield questions.insert(question);
             this.body = question;
         }
     },
