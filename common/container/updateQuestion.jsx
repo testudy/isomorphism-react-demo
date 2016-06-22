@@ -25,33 +25,37 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import style from '../style';
 import {
-    createQuestion,
+    getQuestion,
+    updateQuestion,
 } from '../action/backend.jsx';
 
 
-class CreateQuestion extends Component {
+class UpdateQuestion extends Component {
 
     constructor(props) {
         super(props);
-        this.initState();
+        this.props.dispatch(getQuestion(this.props.params.questionId));
+        this.initState(this.props.question);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.params.multi !== this.props.params.multi) {
-            this.initState();
+        if (nextProps.params.questionId !== this.props.params.questionId || this.props.question !== nextProps.question) {
+            this.initState(nextProps.question);
         }
     }
 
-    initState() {
+    initState(initQuestion) {
+        console.log(initQuestion);
         this.state = {
-            title: '',
+            _id: initQuestion._id,
+            title: initQuestion.title,
             titleErrorText: '',
-            image: '',
+            image: initQuestion.image,
             imageFile: null,
-            options: [],
+            options: initQuestion.options || [],
             optionsText: '',
             optionsErrorText: '',
-            multi: !!parseInt(this.props.params.multi, 10),
+            multi: initQuestion.multi,
         };
         this.state.optionsText = this.stringifyOptions(this.state.options);
     }
@@ -160,9 +164,10 @@ class CreateQuestion extends Component {
     submit() {
         if (this.validateTitle() && this.validateOptions()) {
             window.URL.revokeObjectURL(this.state.image);
-            this.props.dispatch(createQuestion({
+            this.props.dispatch(updateQuestion({
+                _id: this.state._id,
                 title: this.state.title,
-                image: this.state.imageFile,
+                image: this.state.imageFile || this.state.image,
                 options: this.state.options,
                 multi: this.state.multi,
             }));
@@ -237,7 +242,7 @@ class CreateQuestion extends Component {
             <Paper style={style.container}>
                 <Card style={style.card}>
                     <CardHeader
-                        title="新建题目"
+                        title="修改题目"
                         style={style.cardHeader}
                     />
                     <CardText style={style.cardText}>
@@ -279,7 +284,7 @@ class CreateQuestion extends Component {
                             />
                         </RaisedButton>
                         <RaisedButton
-                            label="保存题目"
+                            label="保存修改"
                             labelPosition="after"
                             labelStyle={{
                                 verticalAlign: 'middle',
@@ -288,7 +293,7 @@ class CreateQuestion extends Component {
                             onClick={(event) => this.submit()}
                         />
                         <RaisedButton
-                            label="放弃题目"
+                            label="放弃修改"
                             labelPosition="after"
                             labelStyle={{
                                 verticalAlign: 'middle',
@@ -310,4 +315,4 @@ function select(state) {
 }
 
 
-export default connect(select)(CreateQuestion);
+export default connect(select)(UpdateQuestion);

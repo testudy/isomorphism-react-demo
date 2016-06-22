@@ -5,6 +5,9 @@ import {
     connect,
 } from 'react-redux';
 import {
+    Link,
+} from 'react-router';
+import {
     Card,
     CardActions,
     CardHeader,
@@ -59,7 +62,7 @@ class Lib extends Component {
                             style={{
                                 maxWidth: '100%',
                             }}
-                            src={`/${question.image}`}
+                            src={question.image}
                         />
                     </CardText>
                 );
@@ -70,7 +73,7 @@ class Lib extends Component {
                 options = question.options.map((option, index) => {
                     const number = String.fromCharCode('A'.charCodeAt(0) + index);
                     return (
-                        <Checkbox key={`option-checkbox-${question._id}-${index}`}
+                        <Checkbox key={`option-checkbox-${question._id}-${index}-${option.checked}`}
                             disabled={true}
                             defaultChecked={option.checked}
                             label={`${number}、${option.text}`}
@@ -86,7 +89,7 @@ class Lib extends Component {
                         {question.options.map((option, index) => {
                             const number = String.fromCharCode('A'.charCodeAt(0) + index);
                             return (
-                                <RadioButton key={`option-radio-${question._id}-${index}`}
+                                <RadioButton key={`option-radio-${question._id}-${index}-${option.checked}`}
                                     disabled={true}
                                     value={`${index}`}
                                     label={`${number}、${option.text}`}
@@ -97,8 +100,13 @@ class Lib extends Component {
                 );
             }
 
+            // 只有单选框出现了不更新选择框的问题，复选框没有出现，故先只解决单选框的问题。
+            let defaultSelected = question.options.findIndex((option) => {
+                return option.checked;
+            });
+
             return (
-                <Card key={`question${question._id}`} style={{
+                <Card key={`question${question._id}-${defaultSelected}`} style={{
                     padding: '16px',
                 }}>
                     <CardHeader
@@ -114,11 +122,10 @@ class Lib extends Component {
                                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                                 >
-                                <MenuItem primaryText="修改" onTouchTap={()=>{
-                                    alert('修改');
-                                }}/>
+                                <Link to={`/backend/lib/update/${question._id}`}>
+                                    <MenuItem primaryText="修改" />
+                                </Link>
                                 <MenuItem primaryText="删除"  onTouchTap={()=>{
-                                    console.log('删除', question._id);
                                     this.handleRemove(question._id);
                                 }}/>
                             </IconMenu>

@@ -10,6 +10,12 @@ const {
     CREATE_QUESTION_REQUEST,
     CREATE_QUESTION_SUCCESS,
     CREATE_QUESTION_FAILURE,
+    GET_QUESTION_REQUEST,
+    GET_QUESTION_SUCCESS,
+    GET_QUESTION_FAILURE,
+    UPDATE_QUESTION_REQUEST,
+    UPDATE_QUESTION_SUCCESS,
+    UPDATE_QUESTION_FAILURE,
     REMOVE_QUESTION_REQUEST,
     REMOVE_QUESTION_SUCCESS,
     REMOVE_QUESTION_FAILURE,
@@ -44,6 +50,71 @@ export function createQuestion(question) {
         }).catch((error) => {
             dispatch({
                 type: CREATE_QUESTION_FAILURE,
+            });
+        });
+
+    };
+}
+
+
+export function getQuestion(questionId) {
+    return (dispatch, getState) => {
+        dispatch({
+            type: GET_QUESTION_REQUEST,
+        });
+
+        const data = {
+            questionId
+        };
+
+        return fetch('/api/backend/question?' + uri.param(data), {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => response.json()).then((json) => {
+            dispatch({
+                type: GET_QUESTION_SUCCESS,
+                question: json.question,
+            });
+        }).catch((error) => {
+            dispatch({
+                type: GET_QUESTION_FAILURE,
+            });
+        });
+
+    };
+}
+
+
+export function updateQuestion(patchQuestion) {
+    return (dispatch, getState) => {
+        dispatch({
+            type: UPDATE_QUESTION_REQUEST,
+        });
+
+        const body = new FormData();
+        body.append('question', JSON.stringify(patchQuestion));
+        if (typeof patchQuestion.image !== 'string') {
+            body.append('image', patchQuestion.image);
+        }
+
+        return fetch('/api/backend/question', {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+            },
+            body: body,
+        }).then((response) => response.json()).then((json) => {
+            dispatch({
+                type: UPDATE_QUESTION_SUCCESS,
+                question: json.question,
+            });
+            dispatch(push('/backend/lib'));
+        }).catch((error) => {
+            dispatch({
+                type: UPDATE_QUESTION_FAILURE,
             });
         });
 
