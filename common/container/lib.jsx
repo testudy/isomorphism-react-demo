@@ -24,6 +24,7 @@ import IconButton from 'material-ui/IconButton/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {
     fetchLib,
+    removeQuestion,
 } from '../action/backend.jsx';
 
 import style from '../style';
@@ -35,6 +36,12 @@ class Lib extends Component {
         super(props);
         this.props.dispatch(fetchLib());
     }
+
+
+    handleRemove(questionId) {
+        this.props.dispatch(removeQuestion(questionId));
+    }
+
 
     render() {
 
@@ -111,7 +118,8 @@ class Lib extends Component {
                                     alert('修改');
                                 }}/>
                                 <MenuItem primaryText="删除"  onTouchTap={()=>{
-                                    alert('删除');
+                                    console.log('删除', question._id);
+                                    this.handleRemove(question._id);
                                 }}/>
                             </IconMenu>
                         }

@@ -2,6 +2,7 @@ const parse = require('co-busboy');
 const fs = require('fs');
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
     queryTest: function *() {
@@ -46,7 +47,24 @@ module.exports = {
             const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
             const questions = db.collection('questions');
             yield questions.insert(question);
+            db.close();
             this.body = question;
+        }
+    },
+
+    removeQuestion: function *() {
+        const questionId = this.request.body.questionId;
+        console.log(this.request.body, questionId);
+        if (questionId) {
+            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const questions = db.collection('questions');
+            yield questions.findOneAndDelete({
+                _id: new ObjectId(questionId),
+            });
+            db.close();
+            this.body = {
+                questionId: questionId,
+            };
         }
     },
 };

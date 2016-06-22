@@ -2,6 +2,7 @@ import constants from '../constants.jsx';
 
 const {
     CREATE_QUESTION_SUCCESS,
+    REMOVE_QUESTION_SUCCESS,
     FETCH_Lib_SUCCESS,
 } = constants;
 
@@ -25,6 +26,12 @@ function question(state = {}, action) {
 function lib(state = [], action) {
     if (action.type === FETCH_Lib_SUCCESS) {
         return [...action.lib];
+    }
+    if (action.type === REMOVE_QUESTION_SUCCESS) {
+        const index = state.findIndex((question) => {
+            return question._id === action.questionId;
+        });
+        return [...state.slice(0, index), ...state.slice(index + 1)];
     }
     return state;
 }
