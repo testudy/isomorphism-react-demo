@@ -80,6 +80,12 @@ module.exports = {
             });
             db.close();
 
+            test.questions.forEach(function (question) {
+                question.options.forEach(function (option) {
+                    delete option.checked;
+                });
+            });
+
             this.body = test;
         }
     },
