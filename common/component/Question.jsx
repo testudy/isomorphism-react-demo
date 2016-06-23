@@ -30,6 +30,7 @@ export default class Question extends Component {
                     <CardText style={{
                         padding: 0,
                         margin: '16px 0',
+                        textAlign: 'center',
                     }}>
                         <img
                             style={{
@@ -48,7 +49,7 @@ export default class Question extends Component {
                     return (
                         <Checkbox key={`option${question._id}-${index}`}
                             value={`${index}`}
-                            label={`${number}、${option}`}
+                            label={`${number}、${option.text}`}
                         />
                     );
                 });
@@ -60,7 +61,7 @@ export default class Question extends Component {
                             return (
                                 <RadioButton key={`option${question._id}-${index}`}
                                     value={`${index}`}
-                                    label={`${number}、${option}`}
+                                    label={`${number}、${option.text}`}
                                 />
                             );
                         })}

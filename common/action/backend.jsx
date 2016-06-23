@@ -158,7 +158,7 @@ export function fetchLib() {
             type: FETCH_Lib_REQUEST,
         });
 
-        return fetch('/api/questions', {
+        return fetch('/api/backend/questions', {
             headers: {
                 'Accept': 'application/json',
             },

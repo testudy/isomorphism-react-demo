@@ -4,6 +4,26 @@ const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 
+function random(min, max, count) {
+    const result = [];
+
+    function next() {
+        const tmp = min + Math.round(Math.random() * (max - min));
+        if (result.indexOf(tmp) > -1) {
+            return next();
+        }
+        return tmp;
+    }
+
+    for (let i = 0; i < count; i += 1) {
+        result.push(next());
+    }
+
+    return result.sort(function (a, b) {
+        return a > b;
+    });
+}
+
 module.exports = {
     queryTest: function *() {
         this.body = {
@@ -23,8 +43,16 @@ module.exports = {
 
     queryQuestions: function *() {
         const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+        const dbQuestions = db.collection('questions');
+        const questions = yield dbQuestions.find().toArray();
+        this.body = random(0, questions.length, 2).map(function (index) {
+            return questions[index];
+        });
+    },
+
+    getQuestions: function *() {
+        const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
         const questions = db.collection('questions');
-        //yield questions.insertMany(require('../data/questions'));
         this.body = yield questions.find().toArray();
     },
 
