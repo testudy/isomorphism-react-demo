@@ -35,7 +35,7 @@ export function createTest(user) {
                 type: CREATE_TEST_SUCCESS,
                 user: json,
             });
-            dispatch(push(`/test/${json.date}/${json.phone}`));
+            dispatch(push(`/${json.date}/${json.phone}`));
         }).catch((error) => {
             dispatch({
                 type: CREATE_TEST_FAILURE,

@@ -7,7 +7,7 @@ router.get('/', function *() {
     });
 });
 
-router.get('/:phone/:timestamp', function *() {
+router.get('/:timestamp/:phone', function *() {
     this.render('frontend', {
         title: 'Tea Frontend',
         csrf: this.csrf,
