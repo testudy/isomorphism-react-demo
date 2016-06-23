@@ -57,15 +57,6 @@ export default class AppAction extends Component {
         return (
             <div>
                 <RaisedButton
-                    label="开始"
-                    labelPosition="after"
-                    labelStyle={{
-                        verticalAlign: 'middle',
-                    }}
-                    primary={true}
-                    icon={<ContentSend />}
-                />
-                <RaisedButton
                     label={this.state.countdown}
                     labelPosition="after"
                     labelStyle={{
@@ -73,15 +64,6 @@ export default class AppAction extends Component {
                     }}
                     primary={true}
                     icon={<ActionSchedule />}
-                />
-                <RaisedButton
-                    label="继续"
-                    labelPosition="after"
-                    labelStyle={{
-                        verticalAlign: 'middle',
-                    }}
-                    primary={true}
-                    icon={<ContentSend />}
                 />
                 <RaisedButton
                     label="保存"
