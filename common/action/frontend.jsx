@@ -17,8 +17,6 @@ const {
 
 export function createTest(user) {
     return (dispatch, getState) => {
-        const user = getState().user;
-
         dispatch({
             type: CREATE_TEST_REQUEST,
         });
@@ -44,15 +42,18 @@ export function createTest(user) {
     };
 }
 
-export function fetchQuestions() {
+export function fetchQuestions(date, phone) {
     return (dispatch, getState) => {
         dispatch({
             type: FETCH_QUESTIONS_REQUEST,
         });
 
-        const user = getState().user;
+        const data = {
+            date,
+            phone,
+        };
 
-        return fetch('/api/questions?' + uri.param(user), {
+        return fetch('/api/questions?' + uri.param(data), {
             headers: {
                 'Accept': 'application/json',
             },

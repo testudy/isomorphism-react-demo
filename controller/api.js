@@ -29,7 +29,7 @@ module.exports = {
         this.body = {
             name: 'hujiwei',
             phone: '18610519178',
-            date: Date.now(),
+            date: (new Date().toISOString().split('T')[0]),
         };
     },
 

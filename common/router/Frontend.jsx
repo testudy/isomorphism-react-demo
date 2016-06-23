@@ -20,7 +20,7 @@ export default class AppRouter extends Component {
         return (
             <Router {...this.props}>
                 <Route path="/" component={Index} />
-                <Route path="/test/:date/:phone" component={Test} />
+                <Route path="/:date/:phone" component={Test} />
             </Router>
         );
     }

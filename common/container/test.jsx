@@ -20,7 +20,7 @@ class Test extends Component {
 
     constructor(props) {
         super(props);
-        this.props.dispatch(fetchQuestions());
+        this.props.dispatch(fetchQuestions(this.props.params.date, this.props.params.phone));
     }
 
     render() {
