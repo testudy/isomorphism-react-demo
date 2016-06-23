@@ -1,8 +1,8 @@
 const router = require('koa-router')();
 const apiController = require('../controller/api');
 
-router.post('/test', apiController.createTest);
-router.get('/questions', apiController.queryQuestions);
+router.put('/test', apiController.createTest);
+router.get('/test', apiController.getTest);
 
 router.get('/backend/questions', apiController.getQuestions);
 router.put('/backend/question', apiController.createQuestion);

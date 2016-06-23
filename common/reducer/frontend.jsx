@@ -2,7 +2,7 @@ import constants from '../constants.jsx';
 
 const {
     CREATE_TEST_SUCCESS,
-    FETCH_QUESTIONS_SUCCESS,
+    FETCH_TEST_SUCCESS,
 } = constants;
 
 function user(state = {}, action) {
@@ -14,13 +14,13 @@ function user(state = {}, action) {
 
 
 /**
- * 题目列表
+ * 当前测试
  * @param {Array} state 前题目列表
  * @return {Array} 题目列表
  */
-function questions(state = [], action) {
-    if (action.type === FETCH_QUESTIONS_SUCCESS) {
-        return [...action.questions];
+function test(state = {questions: []}, action) {
+    if (action.type === FETCH_TEST_SUCCESS) {
+        return action.test;
     }
     return state;
 }
@@ -28,7 +28,7 @@ function questions(state = [], action) {
 
 const reducers = {
     user,
-    questions,
+    test,
 };
 
 export default reducers;

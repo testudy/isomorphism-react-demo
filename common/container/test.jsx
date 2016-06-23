@@ -34,7 +34,7 @@ class Test extends Component {
                         margin: 'auto auto  68px',
                     }}>
                         <TestPause />
-                        <Question questions={this.props.questions} />
+                        <Question questions={this.props.test.questions} />
                     </Paper>
                 </div>
             </MuiThemeProvider>

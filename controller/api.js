@@ -24,22 +24,64 @@ function random(min, max, count) {
     });
 }
 
+
+function *queryQuestions() {
+    const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+    const dbQuestions = db.collection('questions');
+    const questions = yield dbQuestions.find().toArray();
+    return random(0, questions.length, 2).map(function (index) {
+        return questions[index];
+    });
+}
+
+
 module.exports = {
     createTest: function *() {
-        this.body = {
-            name: 'hujiwei',
-            phone: '18610519178',
-            date: (new Date().toISOString().split('T')[0]),
-        };
+        const name = this.request.body.name;
+        const phone = this.request.body.phone;
+        if (name && phone) {
+            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const tests = db.collection('tests');
+            const date = (new Date().toISOString().split('T')[0]);
+            const test = {
+                name,
+                phone,
+                date,
+            };
+
+            const result = yield tests.findOne(test);
+
+            if (!result) {
+                test.questions = yield queryQuestions();
+                yield tests.insert(test);
+            }
+
+            db.close();
+
+            this.body = {
+                name,
+                phone,
+                date,
+            };
+        }
     },
 
-    queryQuestions: function *() {
-        const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
-        const dbQuestions = db.collection('questions');
-        const questions = yield dbQuestions.find().toArray();
-        this.body = random(0, questions.length, 2).map(function (index) {
-            return questions[index];
-        });
+    getTest: function *() {
+        const date = this.request.query.date;
+        const phone = this.request.query.phone;
+        if (date && phone) {
+            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const tests = db.collection('tests');
+            const date = (new Date().toISOString().split('T')[0]);
+
+            const test = yield tests.findOne({
+                phone,
+                date,
+            });
+            db.close();
+
+            this.body = test;
+        }
     },
 
     getQuestions: function *() {
