@@ -8,7 +8,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import TestHeader from '../component/TestHeader.jsx';
-import Question from '../component/Question.jsx';
+import TestQuestion from '../component/TestQuestion.jsx';
 
 import {
     fetchQuestions,
@@ -32,7 +32,7 @@ class Test extends Component {
                         paddingTop: '68px',
                         margin: 'auto auto  68px',
                     }}>
-                        <Question questions={this.props.test.questions} />
+                        <TestQuestion questions={this.props.test.questions} />
                     </Paper>
                 </div>
             </MuiThemeProvider>

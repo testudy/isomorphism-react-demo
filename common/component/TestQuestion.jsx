@@ -15,25 +15,14 @@ import Checkbox from 'material-ui/Checkbox';
 import ActionSchedule from 'material-ui/svg-icons/action/schedule';
 
 
-export default class Question extends Component {
+export default class TestQuestion extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            questions: props.questions,
-        };
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.questions !== this.props.questions) {
-            this.setState({
-                questions: nextProps.questions,
-            });
-        }
     }
 
     render() {
-        const questions = this.state.questions.map((question, index) => {
+        const questions = this.props.questions.map((question, index) => {
             let image = null;
 
             if (question.image) {
