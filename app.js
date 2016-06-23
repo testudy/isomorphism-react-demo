@@ -64,7 +64,7 @@ const backendRouter = require('./router/backend');
 router.use('/backend', backendRouter.routes());
 
 const frontendRouter = require('./router/frontend');
-router.use('/', frontendRouter.routes());
+router.use('/*', frontendRouter.routes());
 
 app.use(router.routes());
 

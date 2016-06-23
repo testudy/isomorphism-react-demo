@@ -7,4 +7,11 @@ router.get('/', function *() {
     });
 });
 
+router.get('/:phone/:timestamp', function *() {
+    this.render('frontend', {
+        title: 'Tea Frontend',
+        csrf: this.csrf,
+    });
+});
+
 module.exports = router;
