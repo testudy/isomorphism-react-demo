@@ -19,10 +19,21 @@ export default class Question extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            questions: props.questions,
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.questions !== this.props.questions) {
+            this.setState({
+                questions: nextProps.questions,
+            });
+        }
     }
 
     render() {
-        const questions = this.props.questions.map((question, index) => {
+        const questions = this.state.questions.map((question, index) => {
             let image = null;
 
             if (question.image) {
@@ -50,12 +61,31 @@ export default class Question extends Component {
                         <Checkbox key={`option${question._id}-${index}`}
                             value={`${index}`}
                             label={`${number}、${option.text}`}
+                            onCheck={(event) => {
+                                if (!question.answers) {
+                                    question.answers = [];
+                                }
+                                const indexOfAnswers = question.answers.indexOf(index);
+                                if (event.target.checked) {
+                                    if (indexOfAnswers === -1) {
+                                        question.answers.push(index);
+                                    }
+                                } else {
+                                    if (indexOfAnswers !== -1) {
+                                        question.answers.splice(indexOfAnswers, 1);
+                                    }
+                                }
+                            }}
                         />
                     );
                 });
             } else {
                 options = (
-                    <RadioButtonGroup name={`question${question._id}`}>
+                    <RadioButtonGroup name={`question${question._id}`}
+                        onChange={(event, value) => {
+                            question.answers = [parseInt(value, 10)];
+                        }}
+                    >
                         {question.options.map((option, index) => {
                             const number = String.fromCharCode('A'.charCodeAt(0) + index);
                             return (
