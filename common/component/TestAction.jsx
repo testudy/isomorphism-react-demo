@@ -6,7 +6,7 @@ import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import ActionSchedule from 'material-ui/svg-icons/action/schedule';
 
-export default class AppAction extends Component {
+export default class TestAction extends Component {
 
     constructor(props) {
         super(props);
@@ -57,16 +57,7 @@ export default class AppAction extends Component {
         return (
             <div>
                 <RaisedButton
-                    label={this.state.countdown}
-                    labelPosition="after"
-                    labelStyle={{
-                        verticalAlign: 'middle',
-                    }}
-                    primary={true}
-                    icon={<ActionSchedule />}
-                />
-                <RaisedButton
-                    label="保存"
+                    label={`保存 ${this.state.countdown}`}
                     labelPosition="after"
                     labelStyle={{
                         verticalAlign: 'middle',

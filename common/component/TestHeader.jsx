@@ -7,7 +7,7 @@ import TestAction from './TestAction.jsx';
 import TestProgress from './TestProgress.jsx';
 
 
-export default class AppHeader extends Component {
+export default class TestHeader extends Component {
 
     constructor(props) {
         super(props);
