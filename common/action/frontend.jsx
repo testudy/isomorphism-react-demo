@@ -7,6 +7,7 @@ import constants from '../constants.jsx';
 import uri from '../../util/uri';
 
 const {
+    SET_TEST_ANSWER,
     CREATE_TEST_REQUEST,
     CREATE_TEST_SUCCESS,
     CREATE_TEST_FAILURE,
@@ -14,6 +15,14 @@ const {
     FETCH_TEST_SUCCESS,
     FETCH_TEST_FAILURE,
 } = constants;
+
+export function setTestAnswer(questionId, answer) {
+    return {
+        type: SET_TEST_ANSWER,
+        questionId,
+        answer,
+    };
+}
 
 export function createTest(user) {
     return (dispatch, getState) => {

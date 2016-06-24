@@ -72,7 +72,6 @@ module.exports = {
         if (date && phone) {
             const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
             const tests = db.collection('tests');
-            const date = (new Date().toISOString().split('T')[0]);
 
             const test = yield tests.findOne({
                 phone,

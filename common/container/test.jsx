@@ -11,6 +11,7 @@ import TestHeader from '../component/TestHeader.jsx';
 import TestQuestion from '../component/TestQuestion.jsx';
 
 import {
+    setTestAnswer,
     fetchQuestions,
 } from '../action/frontend.jsx';
 
@@ -32,7 +33,11 @@ class Test extends Component {
                         paddingTop: '68px',
                         margin: 'auto auto  68px',
                     }}>
-                        <TestQuestion questions={this.props.test.questions} />
+                        <TestQuestion questions={this.props.test.questions}
+                            onSetAnswer={(questionId, answer) => {
+                                this.props.dispatch(setTestAnswer(questionId, answer));
+                            }}
+                        />
                     </Paper>
                 </div>
             </MuiThemeProvider>

@@ -50,20 +50,20 @@ export default class TestQuestion extends Component {
                         <Checkbox key={`option${question._id}-${index}`}
                             value={`${index}`}
                             label={`${number}、${option.text}`}
+                            checked={question.answer && question.answer.indexOf(index) > -1}
                             onCheck={(event) => {
-                                if (!question.answers) {
-                                    question.answers = [];
-                                }
-                                const indexOfAnswers = question.answers.indexOf(index);
+                                const answer = question.answer && [...question.answer] || [];
+                                const indexOfAnswer = answer.indexOf(index);
                                 if (event.target.checked) {
-                                    if (indexOfAnswers === -1) {
-                                        question.answers.push(index);
+                                    if (indexOfAnswer === -1) {
+                                        answer.push(index);
                                     }
                                 } else {
-                                    if (indexOfAnswers !== -1) {
-                                        question.answers.splice(indexOfAnswers, 1);
+                                    if (indexOfAnswer !== -1) {
+                                        answer.splice(indexOfAnswer, 1);
                                     }
                                 }
+                                this.props.onSetAnswer(question._id, answer);
                             }}
                         />
                     );
@@ -72,7 +72,8 @@ export default class TestQuestion extends Component {
                 options = (
                     <RadioButtonGroup name={`question${question._id}`}
                         onChange={(event, value) => {
-                            question.answers = [parseInt(value, 10)];
+                            const answer = [parseInt(value, 10)];
+                            this.props.onSetAnswer(question._id, answer);
                         }}
                     >
                         {question.options.map((option, index) => {
