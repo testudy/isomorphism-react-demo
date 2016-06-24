@@ -1,5 +1,6 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import {
     connect,
@@ -41,7 +42,7 @@ class Done extends Component {
                     <Paper style={style.container}>
                         <Card style={style.card}>
                             <CardHeader
-                                title={`${this.props.test.name} 同学：`}
+                                title={`${this.props.name} 同学：`}
                                 style={style.cardHeader}
                             />
                             <CardText style={style.cardText}>
@@ -65,9 +66,15 @@ class Done extends Component {
 
 }
 
+Done.propTypes = {
+    name: PropTypes.string.isRequired,
+};
+
 
 function select(state) {
-    return state;
+    return {
+        name: state.test.name || 'Hello',
+    };
 }
 
 
