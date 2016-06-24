@@ -13,34 +13,27 @@ export default class AppHeader extends Component {
         };
     }
 
-    componentDidMount() {
-        this.timer = setTimeout(() => this.progress(5), 1000);
+    componentWillReceiveProps(nextProps) {
+        this.progress();
     }
 
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
-
-    progress(completed) {
-        if (completed > 100) {
-            this.setState({
-                completed: 100,
-            });
-        } else {
-            this.setState({
-                completed,
-            });
-
-            const diff = Math.round(Math.random() * 10);
-
-            this.timer = setTimeout(() => this.progress(completed + diff), 1000);
-        }
+    progress() {
+        const completed = this.props.questions.reduce((value, question) => {
+            if (question.answer && question.answer.length > 0) {
+                value += 1;
+            }
+            return value;
+        }, 0) / this.props.questions.length;;
+        this.setState({
+            completed,
+        });
     }
 
     render() {
         return (
             <LinearProgress mode="determinate"
                 value={this.state.completed}
+                max={1}
                 style={{
                     borderRadius: 0,
                 }}

@@ -22,7 +22,7 @@ export default class TestHeader extends Component {
             }}
                 zDepth={2}
             >
-                <TestProgress />
+                <TestProgress questions={this.props.questions} />
                 <AppBar
                     title="TEA素质测评"
                     iconElementRight={<TestAction />}

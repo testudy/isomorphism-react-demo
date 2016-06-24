@@ -27,7 +27,7 @@ class Test extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <div>
-                    <TestHeader />
+                    <TestHeader questions={this.props.test.questions} />
                     <Paper style={{
                         width: '960px',
                         paddingTop: '68px',
