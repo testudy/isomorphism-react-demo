@@ -41,7 +41,7 @@ module.exports = {
         const name = this.request.body.name;
         const phone = this.request.body.phone;
         if (name && phone) {
-            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const db = yield client.db();
             const tests = db.collection('tests');
             const date = (new Date().toISOString().split('T')[0]);
             const test = {
@@ -71,7 +71,7 @@ module.exports = {
         const date = this.request.query.date;
         const phone = this.request.query.phone;
         if (date && phone) {
-            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const db = yield client.db();
             const tests = db.collection('tests');
 
             const test = yield tests.findOne({
@@ -80,13 +80,16 @@ module.exports = {
             });
             db.close();
 
-            test.questions.forEach(function (question) {
-                question.options.forEach(function (option) {
-                    delete option.checked;
+            if (!test.done) {
+                test.questions.forEach(function (question) {
+                    question.options.forEach(function (option) {
+                        delete option.checked;
+                    });
                 });
-            });
+             
+                this.body = test;
+            }
 
-            this.body = test;
         }
     },
 
@@ -97,12 +100,11 @@ module.exports = {
             const tests = db.collection('tests');
             const testId = this._id;
             delete test._id;
+            test.done = true;
 
-            const result = yield tests.findOneAndUpdate({
+            const result = yield tests.findOneAndReplace({
                 _id: new ObjectId(testId),
-            }, {
-                $set: test,
-            });
+            }, test);
             db.close();
             console.log(result);
 

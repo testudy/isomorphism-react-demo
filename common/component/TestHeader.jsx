@@ -1,5 +1,6 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
@@ -38,3 +39,7 @@ export default class TestHeader extends Component {
     }
 
 }
+
+TestHeader.propTypes = {
+    questions: PropTypes.array.isRequired,
+};

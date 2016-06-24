@@ -6,22 +6,16 @@ const {
     FETCH_TEST_SUCCESS,
 } = constants;
 
-function user(state = {}, action) {
-    if (action.type === CREATE_TEST_SUCCESS) {
-        return Object.assign({}, action.user);
-    }
-    return state;
-}
-
-function queryQuestion(questionId) {
-}
-
 /**
  * 当前测试
  * @param {Array} state 前题目列表
  * @return {Array} 题目列表
  */
-function test(state = {questions: []}, action) {
+function test(state = {questions: [],}, action) {
+    if (action.type === CREATE_TEST_SUCCESS) {
+        return Object.assign({}, state, action.user);
+    }
+
     if (action.type === FETCH_TEST_SUCCESS) {
         return action.test;
     }
@@ -38,7 +32,6 @@ function test(state = {questions: []}, action) {
 
 
 const reducers = {
-    user,
     test,
 };
 

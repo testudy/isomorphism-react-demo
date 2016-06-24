@@ -1,10 +1,11 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import LinearProgress from 'material-ui/LinearProgress';
 
 
-export default class AppHeader extends Component {
+export default class TestProgress extends Component {
 
     constructor(props) {
         super(props);
@@ -13,17 +14,20 @@ export default class AppHeader extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps() {
         this.progress();
     }
 
     progress() {
+
         const completed = this.props.questions.reduce((value, question) => {
             if (question.answer && question.answer.length > 0) {
                 value += 1;
             }
+
             return value;
-        }, 0) / this.props.questions.length;;
+        }, 0) / this.props.questions.length;
+
         this.setState({
             completed,
         });
@@ -42,3 +46,7 @@ export default class AppHeader extends Component {
     }
 
 }
+
+TestProgress.propTypes = {
+    questions: PropTypes.array.isRequired,
+};

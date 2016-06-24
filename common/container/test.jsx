@@ -1,5 +1,6 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import {
     connect,
@@ -28,7 +29,7 @@ class Test extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <div>
-                    <TestHeader questions={this.props.test.questions} onSubmit={() => {
+                    <TestHeader questions={this.props.questions} onSubmit={() => {
                         this.props.dispatch(updateTest());
                     }} />
                     <Paper style={{
@@ -36,7 +37,7 @@ class Test extends Component {
                         paddingTop: '68px',
                         margin: 'auto auto  68px',
                     }}>
-                        <TestQuestion questions={this.props.test.questions}
+                        <TestQuestion questions={this.props.questions}
                             onSetAnswer={(questionId, answer) => {
                                 this.props.dispatch(setTestAnswer(questionId, answer));
                             }}
@@ -49,9 +50,17 @@ class Test extends Component {
 
 }
 
+Test.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    params: PropTypes.object.isRequired,
+    questions: PropTypes.array.isRequired,
+};
+
 
 function select(state) {
-    return state;
+    return {
+        questions: state.test.questions,
+    };
 }
 
 

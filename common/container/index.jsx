@@ -1,5 +1,6 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import {
     connect,
@@ -99,7 +100,9 @@ class Index extends Component {
 
 
     handleKeyDown(keyCode) {
-        if (keyCode === 13) {
+        const ENTER_KEY_CODE = 13;
+
+        if (keyCode === ENTER_KEY_CODE) {
             this.submit();
         }
     }
@@ -151,7 +154,7 @@ class Index extends Component {
                                 }}
                                 primary={true}
                                 icon={<ContentSend />}
-                                onClick={(event) => this.submit()}
+                                onClick={() => this.submit()}
                             />
                             </CardActions>
                         </Card>
@@ -162,6 +165,10 @@ class Index extends Component {
     }
 
 }
+
+Index.propTypes = {
+    dispatch: PropTypes.func.isRequired,
+};
 
 
 function select(state) {

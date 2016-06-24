@@ -1,11 +1,10 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentSave from 'material-ui/svg-icons/content/save';
-import ActionSchedule from 'material-ui/svg-icons/action/schedule';
 import Dialog from 'material-ui/Dialog';
 
 
@@ -16,9 +15,9 @@ export default class TestAction extends Component {
         this.state = {
             open: false,
             completed: 0,
-            countdown: '30:00',
+            countdown: '1:00',
         };
-        this.countdown = 30 * 60;
+        this.countdown = 1 * 60;
         this.start = Date.now();
     }
 
@@ -44,6 +43,7 @@ export default class TestAction extends Component {
 
             if (diff <= 0) {
                 diff = 0;
+                this.props.onSubmit();
                 clearInterval(this.schedule);
             }
             this.setState({
@@ -71,8 +71,10 @@ export default class TestAction extends Component {
             if (question.answer && question.answer.length > 0) {
                 value += 1;
             }
+
             return value;
-        }, 0) / this.props.questions.length;;
+        }, 0) / this.props.questions.length;
+
         if (completed !== 1) {
             this.setState({
                 open: true,
@@ -86,12 +88,12 @@ export default class TestAction extends Component {
             <FlatButton
                 label="取消"
                 primary={true}
-                onTouchTap={(event) => this.handleClose()}
+                onTouchTap={() => this.handleClose()}
             />,
             <FlatButton
                 label="提交"
                 primary={true}
-                onTouchTap={(event) => this.handleDetermine()}
+                onTouchTap={() => this.handleDetermine()}
             />,
         ];
 
@@ -105,7 +107,7 @@ export default class TestAction extends Component {
                     }}
                     primary={true}
                     icon={<ContentSave />}
-                    onClick={(event) => this.submit()}
+                    onClick={() => this.submit()}
                 />
                 <Dialog
                     title="提交确定"
@@ -119,3 +121,8 @@ export default class TestAction extends Component {
         );
     }
 }
+
+TestAction.propTypes = {
+    questions: PropTypes.array.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+};
