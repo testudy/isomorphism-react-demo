@@ -14,4 +14,11 @@ router.get('/:timestamp/:phone', function *() {
     });
 });
 
+router.get('/done', function *() {
+    this.render('frontend', {
+        title: 'Tea Frontend',
+        csrf: this.csrf,
+    });
+});
+
 module.exports = router;

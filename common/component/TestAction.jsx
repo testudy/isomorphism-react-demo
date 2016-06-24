@@ -1,16 +1,20 @@
 import React, {
     Component,
 } from 'react';
+import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import ContentSave from 'material-ui/svg-icons/content/save';
 import ActionSchedule from 'material-ui/svg-icons/action/schedule';
+import Dialog from 'material-ui/Dialog';
+
 
 export default class TestAction extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            open: false,
             completed: 0,
             countdown: '30:00',
         };
@@ -49,11 +53,48 @@ export default class TestAction extends Component {
     }
 
     componentWillUnmount() {
-        clearTimeout(this.timer);
         clearInterval(this.schedule);
     }
 
+    handleClose() {
+        this.setState({
+            open: false,
+        });
+    }
+
+    handleDetermine() {
+        this.props.onSubmit();
+    }
+
+    submit() {
+        const completed = this.props.questions.reduce((value, question) => {
+            if (question.answer && question.answer.length > 0) {
+                value += 1;
+            }
+            return value;
+        }, 0) / this.props.questions.length;;
+        if (completed !== 1) {
+            this.setState({
+                open: true,
+                completed,
+            });
+        }
+    }
+
     render() {
+        const actions = [
+            <FlatButton
+                label="取消"
+                primary={true}
+                onTouchTap={(event) => this.handleClose()}
+            />,
+            <FlatButton
+                label="提交"
+                primary={true}
+                onTouchTap={(event) => this.handleDetermine()}
+            />,
+        ];
+
         return (
             <div>
                 <RaisedButton
@@ -64,7 +105,16 @@ export default class TestAction extends Component {
                     }}
                     primary={true}
                     icon={<ContentSave />}
+                    onClick={(event) => this.submit()}
                 />
+                <Dialog
+                    title="提交确定"
+                    actions={actions}
+                    modal={true}
+                    open={this.state.open}
+                >
+                    答题完成率{Math.round(this.state.completed * 100)}%，确定提交吗？
+                </Dialog>
             </div>
         );
     }

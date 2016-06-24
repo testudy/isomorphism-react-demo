@@ -12,6 +12,7 @@ let config = {
     viewDir: path.join(__dirname, '..', 'view'),
     logDir: path.join(__dirname, '..', 'log'),
     staticDir: path.join(__dirname, '..', 'public'),
+    db: 'mongodb://localhost:27017/tea',
 
 };
 

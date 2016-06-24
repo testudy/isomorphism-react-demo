@@ -1,5 +1,6 @@
 const parse = require('co-busboy');
 const fs = require('fs');
+const client = require('../util/client');
 
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
@@ -86,6 +87,28 @@ module.exports = {
             });
 
             this.body = test;
+        }
+    },
+
+    updateTest: function *() {
+        const test = this.request.body.test;
+        if (test && test._id) {
+            const db = yield client.db();
+            const tests = db.collection('tests');
+            const testId = this._id;
+            delete test._id;
+
+            const result = yield tests.findOneAndUpdate({
+                _id: new ObjectId(testId),
+            }, {
+                $set: test,
+            });
+            db.close();
+            console.log(result);
+
+            this.body = {
+                test: result.value,
+            };
         }
     },
 

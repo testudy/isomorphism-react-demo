@@ -25,7 +25,7 @@ export default class TestHeader extends Component {
                 <TestProgress questions={this.props.questions} />
                 <AppBar
                     title="TEA素质测评"
-                    iconElementRight={<TestAction />}
+                    iconElementRight={<TestAction questions={this.props.questions} onSubmit={this.props.onSubmit} />}
                     iconStyleRight={{
                         marginTop: 0,
                         marginRight: 0,

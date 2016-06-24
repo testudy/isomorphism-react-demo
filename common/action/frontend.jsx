@@ -14,6 +14,9 @@ const {
     FETCH_TEST_REQUEST,
     FETCH_TEST_SUCCESS,
     FETCH_TEST_FAILURE,
+    UPDATE_TEST_REQUEST,
+    UPDATE_TEST_SUCCESS,
+    UPDATE_TEST_FAILURE,
 } = constants;
 
 export function setTestAnswer(questionId, answer) {
@@ -76,6 +79,36 @@ export function fetchQuestions(date, phone) {
                 type: FETCH_TEST_FAILURE,
             });
             //dispatch(push(`/`));
+        });
+    };
+}
+
+export function updateTest() {
+    return (dispatch, getState) => {
+        dispatch({
+            type: UPDATE_TEST_REQUEST,
+        });
+
+        const test = getState().test;
+
+        return fetch('/api/test', {
+            method: 'PATCH',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                test,
+            }),
+        }).then((response) => response.json()).then((json) => {
+            dispatch({
+                type: UPDATE_TEST_SUCCESS,
+            });
+            dispatch(push(`/done`));
+        }).catch((error) => {
+            dispatch({
+                type: UPDATE_TEST_FAILURE,
+            });
         });
     };
 }

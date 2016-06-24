@@ -12,6 +12,7 @@ import TestQuestion from '../component/TestQuestion.jsx';
 
 import {
     setTestAnswer,
+    updateTest,
     fetchQuestions,
 } from '../action/frontend.jsx';
 
@@ -27,7 +28,9 @@ class Test extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <div>
-                    <TestHeader questions={this.props.test.questions} />
+                    <TestHeader questions={this.props.test.questions} onSubmit={() => {
+                        this.props.dispatch(updateTest());
+                    }} />
                     <Paper style={{
                         width: '960px',
                         paddingTop: '68px',

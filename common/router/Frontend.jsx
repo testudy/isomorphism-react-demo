@@ -9,6 +9,7 @@ import {
 
 import Index from '../container/index.jsx';
 import Test from '../container/test.jsx';
+import Done from '../container/done.jsx';
 
 export default class AppRouter extends Component {
 
@@ -21,6 +22,7 @@ export default class AppRouter extends Component {
             <Router {...this.props}>
                 <Route path="/" component={Index} />
                 <Route path="/:date/:phone" component={Test} />
+                <Route path="/done" component={Done} />
             </Router>
         );
     }

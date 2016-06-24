@@ -3,6 +3,7 @@ const apiController = require('../controller/api');
 
 router.put('/test', apiController.createTest);
 router.get('/test', apiController.getTest);
+router.patch('/test', apiController.updateTest);
 
 router.get('/backend/questions', apiController.getQuestions);
 router.put('/backend/question', apiController.createQuestion);
