@@ -4,6 +4,7 @@ import React, {
 import {
     connect,
 } from 'react-redux';
+import DatePicker from 'material-ui/DatePicker';
 import {
     Table,
     TableBody,
@@ -14,16 +15,42 @@ import {
     TableFooter,
 } from 'material-ui/Table';
 
+import style from '../style';
 
 class Report extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            //const date = (new Date().toISOString().split('T')[0]);
+            date: new Date(),
+        };
+    }
+
+    handleChange(date) {
+        this.setState({
+            date,
+        });
+    }
+
     render() {
         return (
-            <Table style={{
-                width: '960px',
-                margin: 'auto',
-            }}>
-                <TableHeader>
+            <div style={style.container}>
+            <DatePicker
+                hintText="根据日期查询评测报告"
+                container="inline"
+                mode="landscape"
+                disableYearSelection={true}
+                autoOk={true}
+                value={this.state.date}
+                onChange={(e, date) => {
+                    this.handleChange(date);
+                }}
+            />
+            <Table>
+                <TableHeader
+                    displaySelectAll={false}
+                >
                     <TableRow>
                         <TableHeaderColumn>序号</TableHeaderColumn>
                         <TableHeaderColumn>姓名</TableHeaderColumn>
@@ -40,14 +67,17 @@ class Report extends Component {
                         }}>共100份</TableRowColumn>
                     </TableRow>
                 </TableFooter>
-                <TableBody stripedRows={true}>
+                <TableBody
+                    displayRowCheckbox={false}
+                    stripedRows={true}
+                >
                     <TableRow>
                         <TableRowColumn>1</TableRowColumn>
                         <TableRowColumn>克念</TableRowColumn>
                         <TableRowColumn>18610519156</TableRowColumn>
                         <TableRowColumn>100</TableRowColumn>
                         <TableRowColumn>2016.6.1</TableRowColumn>
-                        <TableRowColumn>详细，完成</TableRowColumn>
+                        <TableRowColumn>详细</TableRowColumn>
                     </TableRow>
                     <TableRow>
                         <TableRowColumn>2</TableRowColumn>
@@ -55,7 +85,7 @@ class Report extends Component {
                         <TableRowColumn>18610519157</TableRowColumn>
                         <TableRowColumn>100</TableRowColumn>
                         <TableRowColumn>2016.6.2</TableRowColumn>
-                        <TableRowColumn>详细，完成</TableRowColumn>
+                        <TableRowColumn>详细</TableRowColumn>
                     </TableRow>
                     <TableRow>
                         <TableRowColumn>3</TableRowColumn>
@@ -63,10 +93,11 @@ class Report extends Component {
                         <TableRowColumn>18610519158</TableRowColumn>
                         <TableRowColumn>100</TableRowColumn>
                         <TableRowColumn>2016.6.3</TableRowColumn>
-                        <TableRowColumn>详细，完成</TableRowColumn>
+                        <TableRowColumn>详细</TableRowColumn>
                     </TableRow>
                 </TableBody>
             </Table>
+            </div>
         );
     }
 
