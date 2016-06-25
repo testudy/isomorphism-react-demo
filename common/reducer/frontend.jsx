@@ -4,6 +4,7 @@ const {
     SET_TEST_ANSWER,
     CREATE_TEST_SUCCESS,
     FETCH_TEST_SUCCESS,
+    UPDATE_TEST_SUCCESS,
 } = constants;
 
 /**
@@ -13,10 +14,12 @@ const {
  */
 function test(state = {questions: [],}, action) {
     if (action.type === CREATE_TEST_SUCCESS) {
-        return Object.assign({}, state, action.user);
+        return Object.assign({
+            questions: [],
+        }, action.test);
     }
 
-    if (action.type === FETCH_TEST_SUCCESS) {
+    if (action.type === FETCH_TEST_SUCCESS || action.type === UPDATE_TEST_SUCCESS) {
         return action.test;
     }
 

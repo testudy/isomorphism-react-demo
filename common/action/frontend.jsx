@@ -43,7 +43,7 @@ export function createTest(user) {
         }).then((response) => response.json()).then((json) => {
             dispatch({
                 type: CREATE_TEST_SUCCESS,
-                user: json,
+                test: json,
             });
             dispatch(push(`/${json.date}/${json.phone}`));
         }).catch((error) => {
@@ -103,6 +103,7 @@ export function updateTest() {
         }).then((response) => response.json()).then((json) => {
             dispatch({
                 type: UPDATE_TEST_SUCCESS,
+                test: json,
             });
             dispatch(push(`/done`));
         }).catch((error) => {

@@ -15,9 +15,9 @@ export default class TestAction extends Component {
         this.state = {
             open: false,
             completed: 0,
-            countdown: '1:00',
+            countdown: '30:00',
         };
-        this.countdown = 1 * 60;
+        this.countdown = 30 * 60;
         this.start = Date.now();
     }
 
@@ -75,12 +75,10 @@ export default class TestAction extends Component {
             return value;
         }, 0) / this.props.questions.length;
 
-        if (completed !== 1) {
-            this.setState({
-                open: true,
-                completed,
-            });
-        }
+        this.setState({
+            open: true,
+            completed,
+        });
     }
 
     render() {

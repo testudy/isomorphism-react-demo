@@ -15,6 +15,12 @@ export default class TestHeader extends Component {
     }
 
     render() {
+        let progress = null;
+        let action = null;
+        if (!this.props.done) {
+            progress = <TestProgress questions={this.props.questions} />;
+            action = <TestAction questions={this.props.questions} onSubmit={this.props.onSubmit} />;
+        }
         return (
             <Paper style={{
                 position: 'fixed',
@@ -23,10 +29,10 @@ export default class TestHeader extends Component {
             }}
                 zDepth={2}
             >
-                <TestProgress questions={this.props.questions} />
+                {progress}
                 <AppBar
                     title="TEA素质测评"
-                    iconElementRight={<TestAction questions={this.props.questions} onSubmit={this.props.onSubmit} />}
+                    iconElementRight={action}
                     iconStyleRight={{
                         marginTop: 0,
                         marginRight: 0,

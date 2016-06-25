@@ -29,15 +29,19 @@ class Test extends Component {
         return (
             <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <div>
-                    <TestHeader questions={this.props.questions} onSubmit={() => {
-                        this.props.dispatch(updateTest());
-                    }} />
+                    <TestHeader 
+                        done={this.props.done}
+                        questions={this.props.questions} onSubmit={() => {
+                            this.props.dispatch(updateTest());
+                        }}
+                    />
                     <Paper style={{
                         width: '960px',
                         paddingTop: '68px',
                         margin: 'auto auto  68px',
                     }}>
                         <TestQuestion questions={this.props.questions}
+                            done={this.props.done}
                             onSetAnswer={(questionId, answer) => {
                                 this.props.dispatch(setTestAnswer(questionId, answer));
                             }}
@@ -60,6 +64,7 @@ Test.propTypes = {
 function select(state) {
     return {
         questions: state.test.questions,
+        done: !!state.test.done,
     };
 }
 

@@ -9,7 +9,7 @@ function random(min, max, count) {
     const result = [];
 
     function next() {
-        const tmp = min + Math.round(Math.random() * (max - min));
+        const tmp = min + Math.floor(Math.random() * (max - min));
         if (result.indexOf(tmp) > -1) {
             return next();
         }
@@ -27,7 +27,7 @@ function random(min, max, count) {
 
 
 function *queryQuestions() {
-    const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+    const db = yield client.db();
     const dbQuestions = db.collection('questions');
     const questions = yield dbQuestions.find().toArray();
     return random(0, questions.length, 2).map(function (index) {
@@ -48,22 +48,19 @@ module.exports = {
                 name,
                 phone,
                 date,
+                done: false,
             };
 
-            const result = yield tests.findOne(test);
+            let result = yield tests.findOne(test);
 
             if (!result) {
-                test.questions = yield queryQuestions();
-                yield tests.insert(test);
+                let insertResult = yield tests.insertOne(test);
+                result = insertResult.ops[0];
             }
 
             db.close();
 
-            this.body = {
-                name,
-                phone,
-                date,
-            };
+            this.body = result;
         }
     },
 
@@ -81,14 +78,18 @@ module.exports = {
             db.close();
 
             if (!test.done) {
+                test.questions = yield queryQuestions();
                 test.questions.forEach(function (question) {
-                    question.options.forEach(function (option) {
-                        delete option.checked;
-                    });
+                    if (question && question.options) {
+                        question.options.forEach(function (option) {
+                            delete option.checked;
+                        });
+                    }
                 });
              
-                this.body = test;
             }
+
+            this.body = test;
 
         }
     },
@@ -98,15 +99,18 @@ module.exports = {
         if (test && test._id) {
             const db = yield client.db();
             const tests = db.collection('tests');
-            const testId = this._id;
+            const testId = test._id;
             delete test._id;
             test.done = true;
 
-            const result = yield tests.findOneAndReplace({
+            const result = yield tests.findOneAndUpdate({
                 _id: new ObjectId(testId),
-            }, test);
+            }, {
+                $set: test,
+            }, {
+                returnOriginal: false,
+            });
             db.close();
-            console.log(result);
 
             this.body = {
                 test: result.value,

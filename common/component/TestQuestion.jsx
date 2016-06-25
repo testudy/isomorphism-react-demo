@@ -48,9 +48,10 @@ export default class TestQuestion extends Component {
                     const number = String.fromCharCode('A'.charCodeAt(0) + index);
                     return (
                         <Checkbox key={`option${question._id}-${index}`}
+                            disabled={this.props.done}
                             value={`${index}`}
                             label={`${number}、${option.text}`}
-                            checked={question.answer && question.answer.indexOf(index) > -1}
+                            defaultChecked={question.answer && question.answer.indexOf(index) > -1}
                             onCheck={(event) => {
                                 const answer = question.answer && [...question.answer] || [];
                                 const indexOfAnswer = answer.indexOf(index);
@@ -71,6 +72,7 @@ export default class TestQuestion extends Component {
             } else {
                 options = (
                     <RadioButtonGroup name={`question${question._id}`}
+                        defaultSelected={`${question.answer && question.answer[0]}`}
                         onChange={(event, value) => {
                             const answer = [parseInt(value, 10)];
                             this.props.onSetAnswer(question._id, answer);
@@ -80,6 +82,7 @@ export default class TestQuestion extends Component {
                             const number = String.fromCharCode('A'.charCodeAt(0) + index);
                             return (
                                 <RadioButton key={`option${question._id}-${index}`}
+                                    disabled={this.props.done}
                                     value={`${index}`}
                                     label={`${number}、${option.text}`}
                                 />
