@@ -43,6 +43,37 @@ function dateFormat(date) {
     return `${year}-${month}-${dateOfMonth}`;
 }
 
+function markTest(test) {
+    const rightCount = test.questions.reduce((previousRightCount, question) => {
+        if (question && question.options && question.answer) {
+
+            const totalRightCount = question.options.reduce((previousValue, option) => {
+                if (option.checked) {
+                    return previousValue + 1;
+                }
+                return previousValue;
+            }, 0);
+
+            if (totalRightCount === question.answer.length) {
+                let result = true;
+                question.answer.forEach(function (index) {
+                    if (!question.options[index].checked) {
+                        result = false;
+                    }
+                });
+                if (result) {
+                    return previousRightCount + 1;
+                }
+            }
+
+            return previousRightCount;
+        }
+        return previousRightCount;
+    }, 0);
+
+    return rightCount * 100 / test.questions.length;
+}
+
 module.exports = {
     createTest: function *() {
         const name = this.request.body.name;
@@ -105,6 +136,7 @@ module.exports = {
 
             if (test && !test.done) {
                 test.questions = yield queryQuestions();
+                /*
                 test.questions.forEach(function (question) {
                     if (question && question.options) {
                         question.options.forEach(function (option) {
@@ -112,6 +144,7 @@ module.exports = {
                         });
                     }
                 });
+                */
              
             }
 
@@ -128,6 +161,7 @@ module.exports = {
             const testId = test._id;
             delete test._id;
             test.done = true;
+            test.score = markTest(test);
 
             const result = yield tests.findOneAndUpdate({
                 _id: new ObjectId(testId),
