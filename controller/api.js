@@ -2,7 +2,6 @@ const parse = require('co-busboy');
 const fs = require('fs');
 const client = require('../util/client');
 
-const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 
 function random(min, max, count) {
@@ -201,7 +200,7 @@ module.exports = {
             if (imagePath) {
                 question.image = `/${imagePath}`;
             }
-            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const db = yield client.db();
             const questions = db.collection('questions');
             yield questions.insert(question);
             db.close();
@@ -212,7 +211,7 @@ module.exports = {
     getQuestion: function *() {
         const questionId = this.request.query.questionId;
         if (questionId) {
-            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const db = yield client.db();
             const questions = db.collection('questions');
             const question = yield questions.findOne({
                 _id: new ObjectId(questionId),
@@ -250,7 +249,7 @@ module.exports = {
         if (question && question._id) {
             const questionId = question._id;
             delete question._id;
-            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const db = yield client.db();
             const questions = db.collection('questions');
 
             const result = yield questions.findOneAndUpdate({
@@ -268,7 +267,7 @@ module.exports = {
     removeQuestion: function *() {
         const questionId = this.request.body.questionId;
         if (questionId) {
-            const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+            const db = yield client.db();
             const questions = db.collection('questions');
             yield questions.findOneAndDelete({
                 _id: new ObjectId(questionId),
