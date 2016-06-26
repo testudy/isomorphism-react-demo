@@ -116,7 +116,7 @@ class Index extends Component {
                         zDepth={2}
                     >
                         <AppBar
-                            title="TEA素质测评"
+                            title={this.props.title}
                             showMenuIconButton={false}
                         />
                     </Paper>
@@ -167,12 +167,15 @@ class Index extends Component {
 }
 
 Index.propTypes = {
+    title: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
 };
 
 
 function select(state) {
-    return state;
+    return {
+        title: state.title,
+    };
 }
 
 

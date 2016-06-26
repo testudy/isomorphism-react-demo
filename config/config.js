@@ -5,7 +5,7 @@ const path = require('path');
 
 let config = {
 
-    title: 'Tea',
+    title: 'TEA素质测评',
     env: 'production',
     appName: 'TEA',
     port: 18080,

@@ -35,7 +35,7 @@ class Done extends Component {
                         zDepth={2}
                     >
                         <AppBar
-                            title="TEA素质测评"
+                            title={this.props.title}
                             showMenuIconButton={false}
                         />
                     </Paper>
@@ -67,12 +67,14 @@ class Done extends Component {
 }
 
 Done.propTypes = {
+    title: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
 };
 
 
 function select(state) {
     return {
+        title: state.title,
         name: state.test.name || 'Hello',
     };
 }

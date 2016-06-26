@@ -31,7 +31,7 @@ export default class TestHeader extends Component {
             >
                 {progress}
                 <AppBar
-                    title="TEA素质测评"
+                    title={this.props.title}
                     iconElementRight={action}
                     iconStyleRight={{
                         marginTop: 0,
@@ -47,5 +47,6 @@ export default class TestHeader extends Component {
 }
 
 TestHeader.propTypes = {
+    title: PropTypes.string.isRequired,
     questions: PropTypes.array.isRequired,
 };

@@ -31,6 +31,7 @@ class Test extends Component {
                 <div>
                     <TestHeader 
                         done={this.props.done}
+                        title={this.props.title}
                         questions={this.props.questions} onSubmit={() => {
                             this.props.dispatch(updateTest());
                         }}
@@ -55,6 +56,7 @@ class Test extends Component {
 }
 
 Test.propTypes = {
+    title: PropTypes.string.isRequired,
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
     questions: PropTypes.array.isRequired,
@@ -63,6 +65,7 @@ Test.propTypes = {
 
 function select(state) {
     return {
+        title: state.title,
         questions: state.test.questions,
         done: !!state.test.done,
     };

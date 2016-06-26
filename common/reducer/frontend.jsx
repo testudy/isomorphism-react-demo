@@ -34,7 +34,14 @@ function test(state = {questions: [],}, action) {
 }
 
 
+function title() {
+    return 'TEA素质测评';
+}
+
+
+
 const reducers = {
+    title,
     test,
 };
 
