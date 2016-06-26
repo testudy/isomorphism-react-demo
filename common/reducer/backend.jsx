@@ -55,7 +55,12 @@ function tests(state={}, action) {
     return state;
 }
 
+function title() {
+    return 'TEA素质测评系统后台';
+}
+
 const reducers = {
+    title,
     question,
     lib,
     tests

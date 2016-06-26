@@ -1,5 +1,6 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
 import {
     Link,
@@ -37,7 +38,7 @@ export default class Backend extends Component {
                     zDepth={2}
                 >
                     <AppBar
-                        title="TEA评测系统"
+                        title={this.props.title}
                         onLeftIconButtonTouchTap={() => this.handleToggle()}
                     />
                 </Paper>
@@ -62,10 +63,22 @@ export default class Backend extends Component {
     }
 
     handleToggle() {
-        console.log(arguments);
         this.setState({
             open: !this.state.open,
         });
     }
 
 }
+
+Backend.propTypes = {
+    title: PropTypes.string.isRequired,
+};
+
+function select(state) {
+    return {
+        title: state.title,
+    };
+}
+
+
+export default connect(select)(Backend);
