@@ -22,6 +22,9 @@ const {
     FETCH_Lib_REQUEST,
     FETCH_Lib_SUCCESS,
     FETCH_Lib_FAILURE,
+    FETCH_REPORT_REQUEST,
+    FETCH_REPORT_SUCCESS,
+    FETCH_REPORT_FAILURE,
 } = constants;
 
 
@@ -170,6 +173,35 @@ export function fetchLib() {
         }).catch((errpr) => {
             dispatch({
                 type: FETCH_Lib_FAILURE,
+            });
+        });
+    };
+}
+
+export function fetchTests(date) {
+    return (dispatch, getState) => {
+        dispatch({
+            type: FETCH_REPORT_REQUEST,
+        });
+
+        const data = {
+            date,
+        };
+
+        return fetch('/api/tests?' + uri.param(data), {
+            headers: {
+                'Accept': 'application/json',
+            },
+        }).then((response) => response.json()).then((json) => {
+            dispatch({
+                type: FETCH_REPORT_SUCCESS,
+                tests: {
+                    [date]: json,
+                },
+            });
+        }).catch((errpr) => {
+            dispatch({
+                type: FETCH_REPORT_FAILURE,
             });
         });
     };

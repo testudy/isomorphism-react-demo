@@ -26,4 +26,7 @@ export default keymirror({
     FETCH_Lib_REQUEST: null,
     FETCH_Lib_SUCCESS: null,
     FETCH_Lib_FAILURE: null,
+    FETCH_REPORT_REQUEST: null,
+    FETCH_REPORT_SUCCESS: null,
+    FETCH_REPORT_FAILURE: null,
 });

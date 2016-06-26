@@ -1,6 +1,7 @@
 const router = require('koa-router')();
 const apiController = require('../controller/api');
 
+router.get('/tests', apiController.getTests);
 router.put('/test', apiController.createTest);
 router.get('/test', apiController.getTest);
 router.patch('/test', apiController.updateTest);

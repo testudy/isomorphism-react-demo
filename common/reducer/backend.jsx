@@ -6,6 +6,7 @@ const {
     UPDATE_QUESTION_SUCCESS,
     REMOVE_QUESTION_SUCCESS,
     FETCH_Lib_SUCCESS,
+    FETCH_REPORT_SUCCESS,
 } = constants;
 
 /**
@@ -47,9 +48,17 @@ function lib(state = [], action) {
     return state;
 }
 
+function tests(state={}, action) {
+    if (action.type === FETCH_REPORT_SUCCESS) {
+        return Object.assign({}, state, action.tests);
+    }
+    return state;
+}
+
 const reducers = {
     question,
     lib,
+    tests
 };
 
 export default reducers;

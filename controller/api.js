@@ -36,6 +36,13 @@ function *queryQuestions() {
 }
 
 
+function dateFormat(date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const dateOfMonth = date.getDate();
+    return `${year}-${month}-${dateOfMonth}`;
+}
+
 module.exports = {
     createTest: function *() {
         const name = this.request.body.name;
@@ -43,7 +50,7 @@ module.exports = {
         if (name && phone) {
             const db = yield client.db();
             const tests = db.collection('tests');
-            const date = (new Date().toISOString().split('T')[0]);
+            const date = dateFormat(new Date());
             const test = {
                 name,
                 phone,
@@ -64,6 +71,27 @@ module.exports = {
         }
     },
 
+    getTests: function *() {
+        const date = this.request.query.date;
+        console.log(date);
+
+        if (date) {
+            const db = yield client.db();
+            const tests = db.collection('tests');
+
+            const result = yield tests.find({
+                date,
+            }).toArray();
+            console.log(result);
+            db.close();
+
+            this.body = result;
+            return;
+        }
+
+        this.body = [];
+    },
+
     getTest: function *() {
         const date = this.request.query.date;
         const phone = this.request.query.phone;
@@ -77,7 +105,7 @@ module.exports = {
             });
             db.close();
 
-            if (!test.done) {
+            if (test && !test.done) {
                 test.questions = yield queryQuestions();
                 test.questions.forEach(function (question) {
                     if (question && question.options) {
@@ -119,9 +147,11 @@ module.exports = {
     },
 
     getQuestions: function *() {
-        const db = yield MongoClient.connect('mongodb://localhost:27017/tea');
+        const db = yield client.db();
         const questions = db.collection('questions');
-        this.body = yield questions.find().toArray();
+        const result = yield questions.find().toArray();
+        db.close();
+        this.body = result;
     },
 
     createQuestion: function *() {

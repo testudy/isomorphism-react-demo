@@ -4,6 +4,9 @@ import React, {
 import {
     connect,
 } from 'react-redux';
+import {
+    Link,
+} from 'react-router';
 import DatePicker from 'material-ui/DatePicker';
 import {
     Table,
@@ -16,24 +19,57 @@ import {
 } from 'material-ui/Table';
 
 import style from '../style';
+import {
+    fetchTests,
+} from '../action/backend.jsx';
 
 class Report extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            //const date = (new Date().toISOString().split('T')[0]);
             date: new Date(),
         };
+        this.fetchTests();
+    }
+
+    dateFormat(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const dateOfMonth = date.getDate();
+        return `${year}-${month}-${dateOfMonth}`;
+    }
+
+    fetchTests() {
+        const date = this.dateFormat(this.state.date);
+        this.props.dispatch(fetchTests(date));
     }
 
     handleChange(date) {
+        console.log(date);
         this.setState({
             date,
         });
+        this.fetchTests();
     }
 
     render() {
+        console.log(this.props.tests);
+        const tests = this.props.tests[this.dateFormat(this.state.date)] || [];
+        const rows = tests.map((test, index) => {
+            return (
+                <TableRow key={`report-test-${test._id}`}>
+                    <TableRowColumn>{index + 1}</TableRowColumn>
+                    <TableRowColumn>{test.name}</TableRowColumn>
+                    <TableRowColumn>{test.phone}</TableRowColumn>
+                    <TableRowColumn>{test.score}</TableRowColumn>
+                    <TableRowColumn>{test.date}</TableRowColumn>
+                    <TableRowColumn>
+                        <a href={`/${test.date}/${test.phone}`} target="_blank">详情</a>
+                    </TableRowColumn>
+                </TableRow>
+            );
+        });
         return (
             <div style={style.container}>
                 <h2 style={{
@@ -47,6 +83,7 @@ class Report extends Component {
                         autoOk={true}
                         value={this.state.date}
                         onChange={(e, date) => {
+                            console.log(date);
                             this.handleChange(date);
                         }}
                         style={{
@@ -75,37 +112,14 @@ class Report extends Component {
                         <TableRow>
                             <TableRowColumn style={{
                                 textAlign: 'right',
-                            }}>共100份</TableRowColumn>
+                            }}>共{tests.length}份</TableRowColumn>
                         </TableRow>
                     </TableFooter>
                     <TableBody
                         displayRowCheckbox={false}
                         stripedRows={true}
                     >
-                        <TableRow>
-                            <TableRowColumn>1</TableRowColumn>
-                            <TableRowColumn>克念</TableRowColumn>
-                            <TableRowColumn>18610519156</TableRowColumn>
-                            <TableRowColumn>100</TableRowColumn>
-                            <TableRowColumn>2016.6.1</TableRowColumn>
-                            <TableRowColumn>详细</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn>2</TableRowColumn>
-                            <TableRowColumn>克璟</TableRowColumn>
-                            <TableRowColumn>18610519157</TableRowColumn>
-                            <TableRowColumn>100</TableRowColumn>
-                            <TableRowColumn>2016.6.2</TableRowColumn>
-                            <TableRowColumn>详细</TableRowColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableRowColumn>3</TableRowColumn>
-                            <TableRowColumn>克勤</TableRowColumn>
-                            <TableRowColumn>18610519158</TableRowColumn>
-                            <TableRowColumn>100</TableRowColumn>
-                            <TableRowColumn>2016.6.3</TableRowColumn>
-                            <TableRowColumn>详细</TableRowColumn>
-                        </TableRow>
+                        {rows}
                     </TableBody>
                 </Table>
             </div>
@@ -115,8 +129,14 @@ class Report extends Component {
 }
 
 
+Report.propTypes = {
+};
+
+
 function select(state) {
-    return state;
+    return {
+        tests: state.tests || {},
+    };
 }
 
 
