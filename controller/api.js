@@ -73,7 +73,6 @@ module.exports = {
 
     getTests: function *() {
         const date = this.request.query.date;
-        console.log(date);
 
         if (date) {
             const db = yield client.db();
@@ -82,7 +81,6 @@ module.exports = {
             const result = yield tests.find({
                 date,
             }).toArray();
-            console.log(result);
             db.close();
 
             this.body = result;
@@ -140,9 +138,7 @@ module.exports = {
             });
             db.close();
 
-            this.body = {
-                test: result.value,
-            };
+            this.body = result.value;
         }
     },
 
