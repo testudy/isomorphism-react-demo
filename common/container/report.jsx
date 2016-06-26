@@ -65,7 +65,7 @@ class Report extends Component {
                     <TableRowColumn>{test.score}</TableRowColumn>
                     <TableRowColumn>{test.date}</TableRowColumn>
                     <TableRowColumn>
-                        <a href={`/${test.date}/${test.phone}`} target="_blank">详情</a>
+                        <a href={`/${test.date}/${test.name}/${test.phone}`} target="_blank">详情</a>
                     </TableRowColumn>
                 </TableRow>
             );

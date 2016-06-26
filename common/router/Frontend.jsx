@@ -21,7 +21,7 @@ export default class AppRouter extends Component {
         return (
             <Router {...this.props}>
                 <Route path="/" component={Index} />
-                <Route path="/:date/:phone" component={Test} />
+                <Route path="/:date/:name/:phone" component={Test} />
                 <Route path="/done" component={Done} />
             </Router>
         );
