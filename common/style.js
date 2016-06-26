@@ -45,6 +45,10 @@ const style = {
         height: '100%',
         opacity: 0,
     },
+
+    tableCell: {
+        textAlign: 'center',
+    },
 };
 
 export default style;

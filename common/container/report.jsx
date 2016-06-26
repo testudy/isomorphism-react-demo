@@ -59,12 +59,12 @@ class Report extends Component {
         const rows = tests.map((test, index) => {
             return (
                 <TableRow key={`report-test-${test._id}`}>
-                    <TableRowColumn>{index + 1}</TableRowColumn>
-                    <TableRowColumn>{test.name}</TableRowColumn>
-                    <TableRowColumn>{test.phone}</TableRowColumn>
-                    <TableRowColumn>{test.score}</TableRowColumn>
-                    <TableRowColumn>{test.date}</TableRowColumn>
-                    <TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{index + 1}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.name}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.phone}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.score}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.date}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>
                         <a href={`/${test.date}/${test.name}/${test.phone}`} target="_blank">详情</a>
                     </TableRowColumn>
                 </TableRow>
@@ -98,14 +98,15 @@ class Report extends Component {
                 <Table>
                     <TableHeader
                         displaySelectAll={false}
+                        adjustForCheckbox={false}
                     >
                         <TableRow>
-                            <TableHeaderColumn>序号</TableHeaderColumn>
-                            <TableHeaderColumn>姓名</TableHeaderColumn>
-                            <TableHeaderColumn>手机</TableHeaderColumn>
-                            <TableHeaderColumn>分数</TableHeaderColumn>
-                            <TableHeaderColumn>日期</TableHeaderColumn>
-                            <TableHeaderColumn>操作</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>序号</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>姓名</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>手机</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>分数</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>日期</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>操作</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableFooter>
