@@ -61,9 +61,14 @@ class Report extends Component {
                 <TableRow key={`report-test-${test._id}`}>
                     <TableRowColumn style={style.tableCell}>{index + 1}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>{test.name}</TableRowColumn>
-                    <TableRowColumn style={style.tableCell}>{test.phone}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.age}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.age}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.age}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.score1}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.score2}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.score3}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.score4}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>{test.score}</TableRowColumn>
-                    <TableRowColumn style={style.tableCell}>{test.date}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>
                         <a href={`/${test.date}/${test.name}/${test.phone}`} target="_blank">详情</a>
                     </TableRowColumn>
@@ -103,9 +108,14 @@ class Report extends Component {
                         <TableRow>
                             <TableHeaderColumn style={style.tableCell}>序号</TableHeaderColumn>
                             <TableHeaderColumn style={style.tableCell}>姓名</TableHeaderColumn>
-                            <TableHeaderColumn style={style.tableCell}>手机</TableHeaderColumn>
-                            <TableHeaderColumn style={style.tableCell}>分数</TableHeaderColumn>
-                            <TableHeaderColumn style={style.tableCell}>日期</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>年龄</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>现行业</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>现职位</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>概念分</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>策略分</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>批判分</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>信息分</TableHeaderColumn>
+                            <TableHeaderColumn style={style.tableCell}>总分</TableHeaderColumn>
                             <TableHeaderColumn style={style.tableCell}>操作</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
