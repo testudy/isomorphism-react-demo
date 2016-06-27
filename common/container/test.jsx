@@ -10,6 +10,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import TestHeader from '../component/TestHeader.jsx';
 import TestQuestion from '../component/TestQuestion.jsx';
+import UserCard from '../component/UserCard.jsx';
 
 import {
     setTestAnswer,
@@ -41,6 +42,7 @@ class Test extends Component {
                         paddingTop: '68px',
                         margin: 'auto auto  68px',
                     }}>
+                        <UserCard user={this.props.user} />
                         <TestQuestion questions={this.props.questions}
                             done={this.props.done}
                             onSetAnswer={(questionId, answer) => {
@@ -60,12 +62,14 @@ Test.propTypes = {
     dispatch: PropTypes.func.isRequired,
     params: PropTypes.object.isRequired,
     questions: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 
 function select(state) {
     return {
         title: state.title,
+        user: state.test,
         questions: state.test.questions,
         done: !!state.test.done,
     };

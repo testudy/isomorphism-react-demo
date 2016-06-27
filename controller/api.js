@@ -77,6 +77,9 @@ module.exports = {
     createTest: function *() {
         const name = this.request.body.name;
         const phone = this.request.body.phone;
+        const age = this.request.body.age;
+        const industry = this.request.body.industry;
+        const position = this.request.body.position;
         if (name && phone) {
             const db = yield client.db();
             const tests = db.collection('tests');
@@ -85,6 +88,9 @@ module.exports = {
                 name,
                 phone,
                 date,
+                age,
+                industry,
+                position,
                 done: false,
             };
 

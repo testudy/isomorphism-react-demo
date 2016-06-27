@@ -62,8 +62,8 @@ class Report extends Component {
                     <TableRowColumn style={style.tableCell}>{index + 1}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>{test.name}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>{test.age}</TableRowColumn>
-                    <TableRowColumn style={style.tableCell}>{test.age}</TableRowColumn>
-                    <TableRowColumn style={style.tableCell}>{test.age}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.industry}</TableRowColumn>
+                    <TableRowColumn style={style.tableCell}>{test.position}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>{test.score1}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>{test.score2}</TableRowColumn>
                     <TableRowColumn style={style.tableCell}>{test.score3}</TableRowColumn>
