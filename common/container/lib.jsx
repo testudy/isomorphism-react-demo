@@ -179,7 +179,6 @@ function select(state) {
     const lib = [];
 
     state.lib.forEach(function (question) {
-        question.type = question.type || 1;
         if (parseInt(question.type, 10) === libType) {
             lib.push(question);
         }
