@@ -13,6 +13,7 @@ let config = {
     logDir: path.join(__dirname, '..', 'log'),
     staticDir: path.join(__dirname, '..', 'public'),
     db: 'mongodb://localhost:27017/tea',
+    testCountOfType: 2,
 
 };
 

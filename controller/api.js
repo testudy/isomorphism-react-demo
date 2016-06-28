@@ -1,6 +1,7 @@
 const parse = require('co-busboy');
 const fs = require('fs');
 const client = require('../util/client');
+const config = require('../config/config');
 
 const ObjectId = require('mongodb').ObjectId;
 
@@ -28,10 +29,18 @@ function random(min, max, count) {
 function *queryQuestions() {
     const db = yield client.db();
     const dbQuestions = db.collection('questions');
-    const questions = yield dbQuestions.find().toArray();
-    return random(0, questions.length, 2).map(function (index) {
-        return questions[index];
+    const allQuestions = yield dbQuestions.find().toArray();
+    const result = [];
+    [1, 2, 3, 4].forEach(function (type) {
+        const questions = allQuestions.filter((question) => question.type === type);
+        console.log(questions);
+        if (questions) {
+            result.push.apply(result, random(0, questions.length, config.testCountOfType).map(function (index) {
+                return questions[index];
+            }));
+        }
     });
+    return result;
 }
 
 
