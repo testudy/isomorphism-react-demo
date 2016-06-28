@@ -11,6 +11,8 @@ import {
     CardHeader,
     CardText,
 } from 'material-ui/Card';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import {
     RadioButton,
     RadioButtonGroup,
@@ -40,6 +42,7 @@ export default class EditQuestion extends Component {
             optionsText: '',
             optionsErrorText: '',
             multi: initQuestion.multi,
+            type: initQuestion.type || 1,
         };
         this.state.optionsText = this.stringifyOptions(this.state.options);
     }
@@ -151,6 +154,12 @@ export default class EditQuestion extends Component {
         }
     }
 
+    handleType(type) {
+        this.setState({
+            type,
+        });
+    }
+
     submit() {
         if (this.validateTitle() && this.validateOptions()) {
             window.URL.revokeObjectURL(this.state.image);
@@ -159,6 +168,7 @@ export default class EditQuestion extends Component {
                 image: this.state.imageFile || this.state.image,
                 options: this.state.options,
                 multi: this.state.multi,
+                type: this.state.type,
             });
         }
     }
@@ -245,6 +255,12 @@ export default class EditQuestion extends Component {
                             rows={1}
                             onChange={(event) => this.handleTitle(event.target.value) }
                         />
+                        <SelectField value={this.state.type} onChange={(event, index, value) => this.handleType(value)}>
+                            <MenuItem value={1} primaryText="概念性推理" />
+                            <MenuItem value={2} primaryText="策略性推理" />
+                            <MenuItem value={3} primaryText="批判性评估" />
+                            <MenuItem value={4} primaryText="复杂信息理解" />
+                        </SelectField>
                         {image}
                         {options}
                         <br />
