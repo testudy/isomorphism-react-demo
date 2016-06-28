@@ -51,8 +51,8 @@ function dateFormat(date) {
     return `${year}-${month}-${dateOfMonth}`;
 }
 
-function markTest(test) {
-    const rightCount = test.questions.reduce((previousRightCount, question) => {
+function markTest(test, type) {
+    const rightCount = test.questions.filter((question) => question.type === type).reduce((previousRightCount, question) => {
         if (question && question.options && question.answer) {
 
             const totalRightCount = question.options.reduce((previousValue, option) => {
@@ -175,7 +175,11 @@ module.exports = {
             const testId = test._id;
             delete test._id;
             test.done = true;
-            test.score = markTest(test);
+            test.score1 = markTest(test, 1);
+            test.score2 = markTest(test, 2);
+            test.score3 = markTest(test, 3);
+            test.score4 = markTest(test, 4);
+            test.score = test.score1 + test.score2 + test.score3 + test.score4;
 
             const result = yield tests.findOneAndUpdate({
                 _id: new ObjectId(testId),
