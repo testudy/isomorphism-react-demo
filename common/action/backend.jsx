@@ -25,6 +25,7 @@ const {
     FETCH_REPORT_REQUEST,
     FETCH_REPORT_SUCCESS,
     FETCH_REPORT_FAILURE,
+    SET_LIB_TYPE,
 } = constants;
 
 
@@ -204,5 +205,12 @@ export function fetchTests(date) {
                 type: FETCH_REPORT_FAILURE,
             });
         });
+    };
+}
+
+export function setLibType(libType) {
+    return {
+        type: SET_LIB_TYPE,
+        libType,
     };
 }

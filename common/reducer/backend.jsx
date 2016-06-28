@@ -7,6 +7,7 @@ const {
     REMOVE_QUESTION_SUCCESS,
     FETCH_Lib_SUCCESS,
     FETCH_REPORT_SUCCESS,
+    SET_LIB_TYPE,
 } = constants;
 
 /**
@@ -48,7 +49,7 @@ function lib(state = [], action) {
     return state;
 }
 
-function tests(state={}, action) {
+function tests(state = {}, action) {
     if (action.type === FETCH_REPORT_SUCCESS) {
         return Object.assign({}, state, action.tests);
     }
@@ -59,10 +60,18 @@ function title() {
     return 'TEA素质测评系统后台';
 }
 
+function libType(state = 1, action) {
+    if (action.type === SET_LIB_TYPE) {
+        return action.libType;
+    }
+    return state;
+}
+
 const reducers = {
     title,
     question,
     lib,
+    libType,
     tests
 };
 

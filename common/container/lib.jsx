@@ -11,6 +11,7 @@ import {
     Card,
     CardActions,
     CardHeader,
+    CardTitle,
     CardText,
 } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
@@ -28,7 +29,9 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import {
     fetchLib,
     removeQuestion,
+    setLibType,
 } from '../action/backend.jsx';
+import QuestionType from '../component/QuestionType.jsx';
 
 import style from '../style';
 
@@ -43,6 +46,11 @@ class Lib extends Component {
 
     handleRemove(questionId) {
         this.props.dispatch(removeQuestion(questionId));
+    }
+
+
+    handleType(type) {
+        this.props.dispatch(setLibType(type));
     }
 
 
@@ -144,6 +152,20 @@ class Lib extends Component {
 
         return (
             <Paper style={style.container}>
+                <Card style={{
+                    padding: '16px',
+                }}>
+                    <CardTitle style={{
+                        padding: 0,
+                        margin: '16px 0',
+                    }}>
+                        <QuestionType
+                            selectStyle={{width: 150}}
+                            type={this.props.libType}
+                            onTypeChange={(value) => this.handleType(value)}
+                        />题库
+                    </CardTitle>
+                </Card>
                 {questions}
             </Paper>
         );
@@ -153,7 +175,20 @@ class Lib extends Component {
 
 
 function select(state) {
-    return state;
+    const libType = state.libType;
+    const lib = [];
+
+    state.lib.forEach(function (question) {
+        question.type = question.type || 1;
+        if (parseInt(question.type, 10) === libType) {
+            lib.push(question);
+        }
+    });
+
+    return {
+        lib,
+        libType,
+    };
 }
 
 

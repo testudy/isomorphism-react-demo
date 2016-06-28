@@ -11,8 +11,6 @@ import {
     CardHeader,
     CardText,
 } from 'material-ui/Card';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 import {
     RadioButton,
     RadioButtonGroup,
@@ -23,6 +21,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import style from '../style';
+import QuestionType from '../component/QuestionType.jsx';
 
 
 export default class EditQuestion extends Component {
@@ -255,12 +254,10 @@ export default class EditQuestion extends Component {
                             rows={1}
                             onChange={(event) => this.handleTitle(event.target.value) }
                         />
-                        <SelectField value={this.state.type} onChange={(event, index, value) => this.handleType(value)}>
-                            <MenuItem value={1} primaryText="概念性推理" />
-                            <MenuItem value={2} primaryText="策略性推理" />
-                            <MenuItem value={3} primaryText="批判性评估" />
-                            <MenuItem value={4} primaryText="复杂信息理解" />
-                        </SelectField>
+                        <QuestionType
+                            type={this.state.type}
+                            onTypeChange={(value) => this.handleType(value)}
+                        />
                         {image}
                         {options}
                         <br />
