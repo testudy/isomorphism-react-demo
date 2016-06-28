@@ -33,7 +33,6 @@ function *queryQuestions() {
     const result = [];
     [1, 2, 3, 4].forEach(function (type) {
         const questions = allQuestions.filter((question) => question.type === type);
-        console.log(questions);
         if (questions) {
             result.push.apply(result, random(0, questions.length, config.testCountOfType).map(function (index) {
                 return questions[index];
