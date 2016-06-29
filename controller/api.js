@@ -16,6 +16,14 @@ function random(min, max, count) {
         return tmp;
     }
 
+    if (min >= max) {
+	return result;
+    }
+
+    if (count > (max - min)) {
+	count = max - min;
+    }
+
     for (let i = 0; i < count; i += 1) {
         result.push(next());
     }
@@ -124,6 +132,7 @@ module.exports = {
 
             const result = yield tests.find({
                 date,
+                done: true,
             }).toArray();
             db.close();
 

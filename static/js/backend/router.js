@@ -6,7 +6,7 @@ import {
     syncHistoryWithStore,
 } from 'react-router-redux';
 import store from './store';
-import BackendRouter from '../../../common/router/backend.jsx';
+import BackendRouter from '../../../common/router/Backend.jsx';
 
 const history = syncHistoryWithStore(browserHistory, store);
 

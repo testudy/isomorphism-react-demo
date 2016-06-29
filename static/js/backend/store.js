@@ -16,7 +16,7 @@ import {
 import thunkMiddleware from 'redux-thunk';
 
 
-import reducers from '../../../common/reducer/Backend.jsx';
+import reducers from '../../../common/reducer/backend.jsx';
 
 
 const routerMiddlewareWithBrowserHistory = routerMiddleware(browserHistory);
