@@ -1,3 +1,4 @@
+const path = require('path');
 const parse = require('co-busboy');
 const fs = require('fs');
 const client = require('../util/client');
@@ -220,7 +221,7 @@ module.exports = {
             while (part = yield parts) {
                 if (part.fieldname === 'image') {
                     imagePath = `public/image/${Date.now()}-${part.filename}`;
-                    part.pipe(fs.createWriteStream(imagePath));
+                    part.pipe(fs.createWriteStream(path.join(__dirname, '..', imagePath)));
                 }
             }
             const question = JSON.parse(parts.field.question);
@@ -262,7 +263,7 @@ module.exports = {
             while (part = yield parts) {
                 if (part.fieldname === 'image') {
                     imagePath = `public/image/${Date.now()}-${part.filename}`;
-                    part.pipe(fs.createWriteStream(imagePath));
+                    part.pipe(fs.createWriteStream(path.join(__dirname, '..', imagePath)));
                 }
             }
             question = JSON.parse(parts.field.question);
